@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "793620905852",
+    "project_id": "periodtracking-b774e",
+    "storage_bucket": "periodtracking-b774e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:793620905852:android:19569a9979b3d36b272ef9",
+        "android_client_info": {
+          "package_name": "com.demit.teish"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "793620905852-6t2f313g347391p9i4vhaf8rhjhfjrtp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.demit.teish",
+            "certificate_hash": "cfacc09b8ce26bfa5a14695eb7c006b14ea86e8e"
+          }
+        },
+        {
+          "client_id": "793620905852-58lt0sargb3ben3jqq3cr8hukl5m8t4f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDg1bxy0AWG0hI4-qWusE5LTF28obAIWV0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "793620905852-58lt0sargb3ben3jqq3cr8hukl5m8t4f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
