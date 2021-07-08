@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:teish/Extras/CustomColors.dart';
+import 'package:teish/Extras/functions.dart';
 
 import 'Checkdata.dart';
 
@@ -144,10 +145,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           if(!validate()){
                             return;
                           }
-                          setState(() {
-                            isloading = true;
-                          });
 
+                          Functions().showLoaderDialog(context,text: 'Logging in');
                           FirebaseAuth auth = FirebaseAuth.instance;
                           auth.signInWithEmailAndPassword(
                               email: emailcontroller.text.trim(),
@@ -158,11 +157,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                 CheckData()),
                                 ModalRoute.withName('/'));
                           }).catchError((error){
+                            Navigator.of(context).pop();
                             FirebaseAuthException e = error;
                             Fluttertoast.showToast(msg: e.message.toString());
-                            setState(() {
-                              isloading = false;
-                            });
                           });
 
                         }),

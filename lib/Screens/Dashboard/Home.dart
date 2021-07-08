@@ -183,11 +183,65 @@ class HomeScreen extends StatelessWidget {
           print((d.difference(cd).inDays) );
           int diff = (d.difference(cd).inDays + 1) % cycle;
 
+
           if(diff == 0){
             diff = cycle;
           }
           print(diff);
 
+
+
+
+          double percent = 0;
+          if(diff <= model.iwinter){
+            if(diff == model.iwinter){
+              percent = 0.25;
+            }else{
+              int di = diff;
+              double p = di/model.iwinter;
+              double per = p * 0.25;
+
+              percent = per;
+            }
+          }else if(diff <= model.iwinter + model.ispring){
+            if(diff == model.iwinter + model.ispring){
+              percent = 0.5;
+            }else{
+
+              int di = diff - model.iwinter;
+              double p = di/model.ispring;
+              double per = p * 0.25;
+
+              percent = per + 0.25;
+
+            }
+          }else if(diff <= model.iwinter + model.ispring + model.isummer){
+            if(diff == model.iwinter + model.ispring + model.isummer){
+              percent = 0.75;
+            }else{
+
+              int di = diff - (model.iwinter + model.ispring);
+              double p = di/model.isummer;
+              double per = p * 0.25;
+
+              percent = per + 0.5;
+
+
+            }
+          }else{
+            if(diff >= model.iwinter + model.ispring + model.isummer + model.ifall){
+              percent = 1;
+            }else{
+
+              int di = diff - (model.iwinter + model.ispring + model.isummer);
+              double p = di/model.ifall;
+              double per = p * 0.25;
+              percent = per + 0.75;
+
+            }
+          }
+          print(percent * 100);
+          print(((diff - 1) * (360 / cycle)) / 360);
           return Column(
             children: [
               Stack(
@@ -204,7 +258,7 @@ class HomeScreen extends StatelessWidget {
                       alignment: Alignment.center,
                       child: RotationTransition(
                         turns: AlwaysStoppedAnimation(
-                            ((diff - 1) * (360 / cycle)) / 360
+                            percent
                         ),
                         child: Container(
                           width: width * 0.45,

@@ -10,6 +10,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:images_picker/images_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:teish/Extras/CustomColors.dart';
+import 'package:teish/Extras/functions.dart';
 import 'package:teish/Models/UserModel.dart';
 
 import 'Checkdata.dart';
@@ -45,9 +46,7 @@ class _BuildProfileScreenState extends State<BuildProfileScreen> {
 
       addUser();
     }else{
-      setState(() {
-        isloading = false;
-      });
+      Navigator.of(context).pop();
     }
 
   }
@@ -59,18 +58,17 @@ class _BuildProfileScreenState extends State<BuildProfileScreen> {
         emailcontroller.text.trim() : FirebaseAuth.instance.currentUser!.email!
         , namecontroller.text.trim() ,
         formattedDate ,  url);
-    await firestore.collection('Users').doc(uid).set(model.toMap())
+    firestore.collection('Users').doc(uid).set(model.toMap())
         .then((value) => {
           Navigator.pushAndRemoveUntil(
           context, MaterialPageRoute(builder: (BuildContext context) => CheckData()),
           ModalRoute.withName('/')),
           print('userAdded')
         })
-        .catchError((error) => {
-          setState(() {
-            isloading = false;
-          }),
-          print(error),
+        .catchError((error){
+          Navigator.of(context).pop();
+          print(error);
+          Fluttertoast.showToast(msg: "Something went wrong");
         });
   }
   File? _image;
@@ -397,9 +395,7 @@ class _BuildProfileScreenState extends State<BuildProfileScreen> {
                             if(!validate()){
                               return;
                             }
-                            setState(() {
-                              isloading = true;
-                            });
+                            Functions().showLoaderDialog(context,text: 'Registering');
                             if(FirebaseAuth.instance.currentUser != null){
                               uploadPic(_image!);
                               return;
@@ -411,10 +407,7 @@ class _BuildProfileScreenState extends State<BuildProfileScreen> {
                             ).then((value){
                               uploadPic(_image!);
                             }).catchError((error){
-                              setState(() {
-                                isloading = false;
-                              });
-
+                              Navigator.of(context).pop();
                               FirebaseAuthException e = error;
                               Fluttertoast.showToast(msg: e.message.toString());
                             });

@@ -55,13 +55,13 @@ class BaseAlertDialog extends StatelessWidget {
     content: new Text(this._content ),
 
     actions: <Widget>[
-      new FlatButton(
+      new TextButton(
         child: new Text(this._yes,),
         onPressed: () {
           this._yesOnPressed();
         },
       ),
-      new FlatButton(
+      new TextButton(
         child: Text(this._no ,),
         onPressed: () {
           this._noOnPressed();

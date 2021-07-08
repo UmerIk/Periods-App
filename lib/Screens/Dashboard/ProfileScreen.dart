@@ -14,6 +14,7 @@ import 'package:teish/Alert/BaseAlert.dart';
 import 'package:teish/Extras/CustomColors.dart';
 import 'package:teish/Models/UserModel.dart';
 import 'package:teish/Screens/Auth/BuildProfileScreen.dart';
+import 'package:teish/Screens/Dashboard/Calendar.dart';
 
 class ProfileScreen extends StatefulWidget {
 
@@ -293,6 +294,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     padding: EdgeInsets.symmetric(horizontal: width * 0.04),
                     child: Column(
                       children: [
+                        ListTile(
+                          onTap: (){
+                            Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> Calendar()));
+                          },
+                          leading: Icon(Icons.notifications_none,color: CColors.textblack),
+                          title: Text('Calendar' , style: TextStyle(
+                            color: CColors.textblack,
+                            fontSize: 15,
+                            fontFamily: 'FuturaHeavy',
+                          ),
+                          ),
+                          trailing: Icon(Icons.arrow_forward_ios,color: CColors.textblack),
+                        ),
                         ListTile(
                           onTap: (){
                             // Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> ContractionScreen()));
