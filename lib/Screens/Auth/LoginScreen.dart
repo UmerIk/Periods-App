@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:teish/Extras/CustomColors.dart';
 import 'package:teish/Extras/functions.dart';
+import 'package:teish/main.dart';
 
 import 'Checkdata.dart';
 
@@ -41,13 +42,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               SizedBox(height: height * 0.03,),
-              Text('Login to your existing account' , style: TextStyle(
+              Text('Login to your account' , style: TextStyle(
                 color: CColors.textblack,
                 fontFamily: "fh",
                 fontSize: 22,
               ),),
               SizedBox(height: height * 0.03,),
-              Text('Please enter your credentials to login to your existing account.',
+              Text('Please enter your credentials to login to your account.',
                 style: TextStyle(
                   color: Color(0x80000000),
                   fontFamily: "fb",
@@ -56,7 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               SizedBox(height: height * 0.025,),
               Text('Email*', style: TextStyle(
-                color: Color(0x80000000),
+                color: CColors.blue,
                 fontFamily: "fm",
                 fontSize: 14,
               ),
@@ -64,8 +65,8 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(height: height * 0.01,),
               Container(
                 decoration: BoxDecoration(
-                    border: Border.all(color: CColors.lightgray),
-                    borderRadius: BorderRadius.all(Radius.circular(20))
+                    border: Border.all(color: CColors.blue,width: 2),
+                    borderRadius: BorderRadius.all(Radius.circular(10))
                 ),
                 padding: EdgeInsets.symmetric(horizontal: width * 0.03),
                 child: TextField(
@@ -90,7 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(height: height * 0.01,),
               Text('Password*',
                   style: TextStyle(
-                  color: Color(0x80000000),
+                  color: CColors.blue,
                   fontFamily: "fm",
                     fontSize: 14,
                 ),
@@ -99,8 +100,8 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(height: height * 0.01,),
               Container(
                 decoration: BoxDecoration(
-                    border: Border.all(color: CColors.lightgray),
-                    borderRadius: BorderRadius.all(Radius.circular(20))
+                    border: Border.all(color: CColors.blue, width: 2),
+                    borderRadius: BorderRadius.all(Radius.circular(10))
                 ),
                 padding: EdgeInsets.symmetric(horizontal: width * 0.03),
                 child: TextField(
@@ -126,19 +127,20 @@ class _LoginScreenState extends State<LoginScreen> {
               Column(
                 children: [
                   Container(
+                    margin: EdgeInsets.symmetric(vertical: height * 0.02),
                     width: double.infinity,
-                    child: RaisedButton(
-                        color: CColors.pink,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: CColors.blue,
                         padding: EdgeInsets.symmetric(vertical: 15),
+                        shape: StadiumBorder()
+                      ),
+
                         child: Text('Login',style: TextStyle(
                             color: Colors.white,
                             fontFamily: "fh",
                             fontSize: 15
                         ),
-                        ),
-                        shape:  RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(18.0),
-                          side: BorderSide(color: CColors.pink),
                         ),
                         onPressed: () async {
 
@@ -152,10 +154,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               email: emailcontroller.text.trim(),
                               password: passwordcontroller.text.trim()
                           ).then((value){
-                            Navigator.pushAndRemoveUntil(
-                                context, MaterialPageRoute(builder: (BuildContext context) =>
-                                CheckData()),
-                                ModalRoute.withName('/'));
+                            Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (ctx)=> Home()), (route) => false);
                           }).catchError((error){
                             Navigator.of(context).pop();
                             FirebaseAuthException e = error;
@@ -169,7 +168,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('Don\'t have an account?',
+                      Text('Haven\'t register yet?',
                         style: TextStyle(
                             color: CColors.textblack
                         ),
@@ -177,9 +176,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
                       TextButton(onPressed: (){
                         Navigator.of(context).pop();
-                      }, child: Text('Create here',
+                      }, child: Text('Register here',
                         style: TextStyle(
-                          color: CColors.pink,
                           decoration: TextDecoration.underline,
                         ),
                       ),

@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebasestorage;
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:images_picker/images_picker.dart';
@@ -13,6 +14,7 @@ import 'package:teish/Extras/CustomColors.dart';
 import 'package:teish/Extras/functions.dart';
 import 'package:teish/Models/UserModel.dart';
 
+import '../../main.dart';
 import 'Checkdata.dart';
 import 'LoginScreen.dart';
 class BuildProfileScreen extends StatefulWidget {
@@ -59,11 +61,10 @@ class _BuildProfileScreenState extends State<BuildProfileScreen> {
         , namecontroller.text.trim() ,
         formattedDate ,  url);
     firestore.collection('Users').doc(uid).set(model.toMap())
-        .then((value) => {
-          Navigator.pushAndRemoveUntil(
-          context, MaterialPageRoute(builder: (BuildContext context) => CheckData()),
-          ModalRoute.withName('/')),
-          print('userAdded')
+        .then((value){
+
+          Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (ctx)=> Home()), (route) => false);
+          print('userAdded');
         })
         .catchError((error){
           Navigator.of(context).pop();
@@ -157,10 +158,12 @@ class _BuildProfileScreenState extends State<BuildProfileScreen> {
         formattedDate = DateFormat('dd-MM-yyyy').format(picked);
       });
   }
+
+  late double width , height;
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
+    width = MediaQuery.of(context).size.width;
+    height = MediaQuery.of(context).size.height;
     final node = FocusScope.of(context);
 
     return Scaffold(
@@ -177,14 +180,14 @@ class _BuildProfileScreenState extends State<BuildProfileScreen> {
                 Text(
                   FirebaseAuth.instance.currentUser != null
                       ? 'Add your Information' :
-                  'Build your profile'
+                  'Register your Account'
                   , style: TextStyle(
                   color: CColors.textblack,
                   fontFamily: "fh",
                   fontSize: 22,
                 ),),
                 SizedBox(height: height * 0.02,),
-                Text('Please enter your personal information will help to track your cycle easily.',
+                Text('Please enter your personal information to continue.',
                   style: TextStyle(
                     color: Color(0x80000000),
                     fontFamily: "fb",
@@ -194,29 +197,34 @@ class _BuildProfileScreenState extends State<BuildProfileScreen> {
 
                 SizedBox(height: height * 0.025,),
 
-                Container(
-                  width: double.infinity,
-                  child: GestureDetector(
-                    onTap: () {
-                      // getImage();
-                      _showPicker(context);
-                    },
-
-                    child: CircleAvatar(
-                        radius: width * 0.125,
-                        backgroundColor: Colors.transparent,
-                        child:  _image == null ?
-                            ClipOval(child: Image(image: AssetImage('assets/images/cameraplaceholder.png'),fit: BoxFit.cover, width: width * 0.25, height: width * 0.25,))
-                          :ClipOval(child: Image(image: FileImage(_image!) , fit: BoxFit.cover, width: width * 0.25, height: width * 0.25,)),
+                Align(
+                  alignment: Alignment.center,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(color: CColors.blue, width: 2),
+                      shape: BoxShape.circle
+                    ),
+                    child: GestureDetector(
+                      onTap: () {
+                        // getImage();
+                        _showPicker(context);
+                      },
+                      child: CircleAvatar(
+                          radius: width * 0.125,
+                          backgroundColor: Colors.transparent,
+                          child:  _image == null ?
+                              ClipOval(child: Image(image: AssetImage('assets/images/cameraplaceholder.jpg'),fit: BoxFit.cover, width: width * 0.25, height: width * 0.25,))
+                            :ClipOval(child: Image(image: FileImage(_image!) , fit: BoxFit.cover, width: width * 0.25, height: width * 0.25,)),
+                      ),
                     ),
                   ),
                 ),
 
 
                 SizedBox(height: height * 0.025,),
-                Text('Full Name*',
+                Text('Name*',
                   style: TextStyle(
-                    color: Color(0x80000000),
+                    color: CColors.blue,
                     fontFamily: "fm",
                     fontSize: 14,
                   ),
@@ -225,8 +233,9 @@ class _BuildProfileScreenState extends State<BuildProfileScreen> {
                 SizedBox(height: height * 0.015,),
                 Container(
                   decoration: BoxDecoration(
-                      border: Border.all(color: CColors.lightgray),
-                      borderRadius: BorderRadius.all(Radius.circular(20))
+                      border: Border.all(color: CColors.blue,width: 2),
+                      borderRadius: BorderRadius.all(Radius.circular(10))
+
                   ),
                   padding: EdgeInsets.symmetric(horizontal: width * 0.03),
                   child: TextField(
@@ -253,7 +262,7 @@ class _BuildProfileScreenState extends State<BuildProfileScreen> {
                     ? SizedBox() :
                 Text('Email*',
                   style: TextStyle(
-                    color: Color(0x80000000),
+                    color: CColors.blue,
                     fontFamily: "fm",
                     fontSize: 14,
                   ),),
@@ -264,8 +273,9 @@ class _BuildProfileScreenState extends State<BuildProfileScreen> {
                     ? SizedBox() :
                 Container(
                   decoration: BoxDecoration(
-                      border: Border.all(color: CColors.lightgray),
-                      borderRadius: BorderRadius.all(Radius.circular(20))
+                      border: Border.all(color: CColors.blue, width: 2),
+                      borderRadius: BorderRadius.all(Radius.circular(10))
+
                   ),
                   padding: EdgeInsets.symmetric(horizontal: width * 0.03),
                   child: TextField(
@@ -292,7 +302,7 @@ class _BuildProfileScreenState extends State<BuildProfileScreen> {
                     ? SizedBox() :
                 Text('Password*',
                   style: TextStyle(
-                    color: Color(0x80000000),
+                    color: CColors.blue,
                     fontFamily: "fm",
                     fontSize: 14,
                   ),),
@@ -303,8 +313,8 @@ class _BuildProfileScreenState extends State<BuildProfileScreen> {
                     ? SizedBox() :
                 Container(
                   decoration: BoxDecoration(
-                      border: Border.all(color: CColors.lightgray),
-                      borderRadius: BorderRadius.all(Radius.circular(20))
+                      border: Border.all(color: CColors.blue, width: 2),
+                      borderRadius: BorderRadius.all(Radius.circular(10))
                   ),
                   padding: EdgeInsets.symmetric(horizontal: width * 0.03),
                   child: TextField(
@@ -331,15 +341,15 @@ class _BuildProfileScreenState extends State<BuildProfileScreen> {
 
                 Text('Date of Birth*',
                   style: TextStyle(
-                    color: Color(0x80000000),
+                    color: CColors.blue,
                     fontFamily: "fm",
                     fontSize: 14,
                   ),),
                 SizedBox(height: height * 0.015,),
                 Container(
                   decoration: BoxDecoration(
-                      border: Border.all(color: CColors.lightgray),
-                      borderRadius: BorderRadius.all(Radius.circular(20))
+                      border: Border.all(color: CColors.blue,width: 2),
+                      borderRadius: BorderRadius.all(Radius.circular(10))
                   ),
                   padding: EdgeInsets.symmetric(horizontal: width * 0.03 , vertical: 12),
                   child: Row(
@@ -358,7 +368,7 @@ class _BuildProfileScreenState extends State<BuildProfileScreen> {
                       GestureDetector(
                         onTap: (){
                           node.unfocus();
-                          _selectDate(context);
+                          _bottomsheetdate(context);
                         },
                         child: Icon(Icons.calendar_today,
                         color: CColors.blue,),
@@ -420,7 +430,7 @@ class _BuildProfileScreenState extends State<BuildProfileScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text('Already have an account?',
+                        Text('Already registered?',
                           style: TextStyle(
                             color: CColors.textblack
                           ),
@@ -428,7 +438,7 @@ class _BuildProfileScreenState extends State<BuildProfileScreen> {
 
                         TextButton(onPressed: (){
                           Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> LoginScreen()));
-                        }, child: Text('Signin here',
+                        }, child: Text('Login here',
                             style: TextStyle(
                               fontFamily: "fm",
                               decoration: TextDecoration.underline,
@@ -446,7 +456,6 @@ class _BuildProfileScreenState extends State<BuildProfileScreen> {
       ),
     );
   }
-
   bool validate(){
     if(_image == null){
       Fluttertoast.showToast(msg: 'Please select an Image');
@@ -468,5 +477,70 @@ class _BuildProfileScreenState extends State<BuildProfileScreen> {
       return true;
     }
 
+  }
+
+
+  void _bottomsheetdate(BuildContext context){
+    DateTime dateTime = DateTime.now();
+    showModalBottomSheet(
+      context: context,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(topRight: Radius.circular(25),topLeft: Radius.circular(25)),
+      ),
+      backgroundColor: Colors.white,
+      builder: (ctx) => Container(
+        padding: EdgeInsets.symmetric(vertical: height * 0.03 , horizontal: width * 0.1),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Text('Select date ' , style: TextStyle(
+                color: CColors.textblack,
+                fontSize: 18,
+                fontFamily: 'fh',
+              ),),
+
+              Container(
+                height: 300,
+                margin: EdgeInsets.symmetric(vertical: height * 0.01),
+                child: CupertinoDatePicker(
+                  mode: CupertinoDatePickerMode.date,
+                  initialDateTime: DateTime.now(),
+                  minimumDate: DateTime.fromMillisecondsSinceEpoch(0),
+                  maximumDate: DateTime.now(),
+                  onDateTimeChanged: (DateTime newDateTime) {
+                    dateTime = newDateTime;
+                  },
+                ),
+              ),
+
+              Container(
+                width: double.infinity,
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Container(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        shape: StadiumBorder(),
+                        padding: EdgeInsets.symmetric(horizontal: width * 0.03,vertical: height * 0.015),
+                      ),
+                      onPressed: (){
+                        Navigator.of(context).pop();
+                        setState(() {
+                          selectedDate = dateTime;
+                          formattedDate = DateFormat('MMM dd,yyyy').format(selectedDate);
+                        });
+                      },
+                      child: Text('Submit' , style: TextStyle(
+                        color: Colors.white,
+                      ),),
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
+      ),);
   }
 }

@@ -148,7 +148,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 SizedBox(height:  height * 0.03,),
                 Align(
                   alignment: Alignment.centerLeft,
-                  child: Text('Full Name*',
+                  child: Text('Name*',
                     style: TextStyle(
                       color: Color(0x80000000),
                       fontFamily: "fm",
@@ -159,8 +159,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 SizedBox(height: height * 0.015,),
                 Container(
                   decoration: BoxDecoration(
-                      border: Border.all(color: CColors.lightgray),
-                      borderRadius: BorderRadius.all(Radius.circular(20))
+                      border: Border.all(color: CColors.blue, width: 2),
+                      borderRadius: BorderRadius.all(Radius.circular(10))
                   ),
                   padding: EdgeInsets.symmetric(horizontal: width * 0.03),
                   child: TextField(

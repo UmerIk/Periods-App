@@ -240,8 +240,7 @@ class HomeScreen extends StatelessWidget {
 
             }
           }
-          print(percent * 100);
-          print(((diff - 1) * (360 / cycle)) / 360);
+
           return Column(
             children: [
               Stack(
@@ -334,7 +333,7 @@ class HomeScreen extends StatelessWidget {
                   )),
                 ],
               ),
-              Text('Day $diff of your circle',style: TextStyle(
+              Text('Day $diff of your cycle',style: TextStyle(
                   color: CColors.textblack,
                   fontSize: 15,
                   fontFamily: 'fb'

@@ -1,4 +1,3 @@
-import 'package:add_2_calendar/add_2_calendar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -63,23 +62,6 @@ class MyApp extends StatelessWidget {
   final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
   GlobalKey<ScaffoldMessengerState>();
 
-  Event buildEvent({Recurrence? recurrence}) {
-    return Event(
-      title: 'Test eventeee',
-      description: 'example',
-      location: 'Flutter app',
-      startDate: DateTime.now(),
-      endDate: DateTime.now().add(Duration(minutes: 30)),
-      allDay: false,
-      iosParams: IOSParams(
-        reminder: Duration(minutes: 40),
-      ),
-      androidParams: AndroidParams(
-        emailInvites: ["test@example.com"],
-      ),
-      recurrence: recurrence,
-    );
-  }
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

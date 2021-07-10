@@ -64,7 +64,7 @@ class _CalendarState extends State<Calendar> {
 
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: CColors.blue
+                        primary: CColors.pink
                       ),
                       onPressed: () {
                         if(days == 0){
@@ -87,7 +87,7 @@ class _CalendarState extends State<Calendar> {
                     padding: EdgeInsets.symmetric(horizontal: width * 0.015),
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          primary: CColors.pink
+                          primary: CColors.blue
                       ),
                       onPressed: () {
                         if(days == 1){
@@ -170,28 +170,10 @@ class _CalendarState extends State<Calendar> {
     DateTime mfdate = DateFormat('dd-MM-yyyy').parse('01-${cdate.month}-${cdate.year}');
 
     int diff = cdate.difference(lpdate).inDays;
-    print(diff);
+
 
     int cycle = model.iwinter + model.ispring + model.isummer + model.ifall;
 
-    int cycles = (diff~/cycle);
-    print(cycles);
-
-    // int remaining = diff % cycle;
-    // print(remaining);
-
-
-    // if(lpdate.add(Duration(days: ((cycles + 1) * cycle) + (cycle~/2))).month == cdate.month){
-    //   ovulatindate = lpdate.add(Duration(days: ((cycles + 1) * cycle) + (cycle~/2)));
-    // }else{
-    //   ovulatindate = lpdate.add(Duration(days: (cycles * cycle) + (cycle~/2)) );
-    // }
-
-    // if(lpdate.add(Duration(days: ((cycles + 1) * cycle))).month == cdate.month){
-    //   rsdate = lpdate.add(Duration(days: ((cycles + 1) * cycle)));
-    // }else{
-    //   rsdate = lpdate.add(Duration(days: (cycles * cycle)));
-    // }
 
     DateTime ldate;
     if(mfdate.month == 12){
@@ -202,8 +184,6 @@ class _CalendarState extends State<Calendar> {
 
 
     int d = ldate.difference(mfdate).inDays;
-    print('Days $d');
-
     List<DateTime> dates = [];
 
     ifalldays = LinkedHashSet<DateTime>(
@@ -226,9 +206,6 @@ class _CalendarState extends State<Calendar> {
       var date = DateFormat('dd-MM-yyyy').parse('$i-${cdate.month}-${cdate.year}');
       dates.add(date);
     }
-
-
-    print(cycle);
     dates.forEach((element) {
       int dd = element.difference(lpdate).inDays + 1;
       if(dd < 0){
@@ -237,11 +214,11 @@ class _CalendarState extends State<Calendar> {
       int dayac = getday(dd, cycle);
 
       if(dayac != 0){
-        if(dayac <= model.ifall){
+        if(dayac <= model.iwinter){
           iwinterdays.add(element);
-        }else if(dayac <= model.ifall + model.ispring){
+        }else if(dayac <= model.iwinter + model.ispring){
           ispringdays.add(element);
-        }else if(dayac <= model.ifall + model.ispring + model.isummer){
+        }else if(dayac <= model.iwinter + model.ispring + model.isummer){
           isummerdays.add(element);
         }else{
           ifalldays.add(element);
@@ -256,8 +233,8 @@ class _CalendarState extends State<Calendar> {
           color: Colors.black,
         ),
         weekendStyle: TextStyle(
-          color: days == 0 ? CColors.blue : days == 1 ?
-          CColors.pink : days == 2 ? CColors.yellow : CColors.brown,
+          color: days == 0 ? CColors.pink : days == 1 ?
+          CColors.blue : days == 2 ? CColors.yellow : CColors.brown,
         ),
       ),
 
@@ -277,8 +254,8 @@ class _CalendarState extends State<Calendar> {
         ),
         selectedDecoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: days == 0 ? CColors.blue : days == 1 ?
-          CColors.pink : days == 2 ? CColors.yellow : CColors.brown,
+          color: days == 0 ? CColors.pink : days == 1 ?
+          CColors.blue : days == 2 ? CColors.yellow : CColors.brown,
         ),
         selectedTextStyle: TextStyle(
             color: Colors.white
@@ -292,6 +269,9 @@ class _CalendarState extends State<Calendar> {
       availableGestures: AvailableGestures.none,
       calendarFormat: CalendarFormat.month,
 
+      onDaySelected: (day, day1){
+        print(day);
+      },
       headerVisible: true,
       headerStyle: HeaderStyle(
         formatButtonVisible: false,
@@ -322,4 +302,18 @@ class _CalendarState extends State<Calendar> {
       return day;
     }
   }
+
+  Event event = Event(
+    title: 'Event title',
+    description: 'Event description',
+    location: 'Event location',
+    startDate: DateTime.now(),
+    endDate: DateTime.now(),
+    iosParams: IOSParams(
+      reminder: Duration(/* Ex. hours:1 */), // on iOS, you can set alarm notification after your event.
+    ),
+    androidParams: AndroidParams(
+      emailInvites: [], // on Android, you can add invite emails to your event.
+    ),
+  );
 }

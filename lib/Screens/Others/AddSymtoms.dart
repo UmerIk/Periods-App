@@ -890,48 +890,50 @@ class AddSymtoms extends StatelessWidget {
       backgroundColor: Colors.white,
       builder: (ctx) => Container(
         padding: EdgeInsets.symmetric(vertical: height * 0.03 , horizontal: width * 0.1),
-        child: Wrap(
-          children: [
-            Text('Select date ' , style: TextStyle(
-              color: CColors.textblack,
-              fontSize: 18,
-              fontFamily: 'fh',
-            ),),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Text('Select date ' , style: TextStyle(
+                color: CColors.textblack,
+                fontSize: 18,
+                fontFamily: 'fh',
+              ),),
 
-            Container(
-              height: 200,
-              margin: EdgeInsets.symmetric(vertical: height * 0.01),
-              child: CupertinoDatePicker(
-                mode: CupertinoDatePickerMode.date,
-                initialDateTime: DateTime.now(),
-                minimumDate: DateTime.fromMillisecondsSinceEpoch(0),
-                maximumDate: DateTime.now(),
-                onDateTimeChanged: (DateTime newDateTime) {
-                  dateTime = newDateTime;
-                },
-              ),
-            ),
-
-            Container(
-              width: double.infinity,
-              child: Align(
-                alignment: Alignment.center,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    shape: StadiumBorder(),
-                    padding: EdgeInsets.symmetric(horizontal: width * 0.03,vertical: height * 0.015),
-                  ),
-                  onPressed: (){
-                    Navigator.of(context).pop();
-                    addData(context , dateTime);
+              Container(
+                height: 300,
+                margin: EdgeInsets.symmetric(vertical: height * 0.01),
+                child: CupertinoDatePicker(
+                  mode: CupertinoDatePickerMode.date,
+                  initialDateTime: DateTime.now(),
+                  minimumDate: DateTime.fromMillisecondsSinceEpoch(0),
+                  maximumDate: DateTime.now(),
+                  onDateTimeChanged: (DateTime newDateTime) {
+                    dateTime = newDateTime;
                   },
-                  child: Text('Submit' , style: TextStyle(
-                    color: Colors.white,
-                  ),),
                 ),
               ),
-            )
-          ],
+
+              Container(
+                width: double.infinity,
+                child: Align(
+                  alignment: Alignment.center,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      shape: StadiumBorder(),
+                      padding: EdgeInsets.symmetric(horizontal: width * 0.03,vertical: height * 0.015),
+                    ),
+                    onPressed: (){
+                      Navigator.of(context).pop();
+                      addData(context , dateTime);
+                    },
+                    child: Text('Submit' , style: TextStyle(
+                      color: Colors.white,
+                    ),),
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),);
   }
