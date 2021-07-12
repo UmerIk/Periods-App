@@ -22,9 +22,9 @@ class _DashboardState extends State<Dashboard> {
   }
   List<Widget> _pages = [
     HomeScreen() ,
+    Calendar(),
     SymptomsScreen(),
     JournalScreen(),
-    // Calendar(),
     ProfileScreen(),
   ];
   @override
@@ -54,6 +54,15 @@ class _DashboardState extends State<Dashboard> {
           BottomNavigationBarItem(
               backgroundColor: Colors.white,
               icon: ImageIcon(
+
+                  AssetImage('assets/icons/calendar.png')
+              ),
+              label: 'Calendar'
+          ),
+
+          BottomNavigationBarItem(
+              backgroundColor: Colors.white,
+              icon: ImageIcon(
                   AssetImage('assets/icons/sanitary-towel.png')
               ),
               label: 'Symptoms'
@@ -65,15 +74,6 @@ class _DashboardState extends State<Dashboard> {
               ),
               label: 'Journal'
           ),
-
-          // BottomNavigationBarItem(
-          //     backgroundColor: Colors.white,
-          //     icon: ImageIcon(
-          //
-          //         AssetImage('assets/icons/calendar.png')
-          //     ),
-          //     label: 'Calendar'
-          // ),
 
           BottomNavigationBarItem(
               backgroundColor: Colors.white,

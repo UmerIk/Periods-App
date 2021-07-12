@@ -45,7 +45,6 @@
     <string msgid="5201977337835724196" name="common_open_on_phone">"在手機上開啟"</string>
     <string msgid="3441753203274453993" name="common_signin_button_text">"登入"</string>
     <string msgid="669893613918351210" name="common_signin_button_text_long">"使用 Google 帳戶登入"</string>
-    <string name="fcm_fallback_notification_channel_label">其他</string>
     <string name="picture_all_audio">所有音頻</string>
     <string name="picture_audio">獲取系統錄音權限被拒絕</string>
     <string name="picture_audio_empty">妳可以使用系統錄音錄制音頻</string>

@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:teish/Extras/CustomColors.dart';
 import 'package:teish/Models/PeriodModel.dart';
@@ -20,6 +22,26 @@ class _LastPeriodScreenState extends State<LastPeriodScreen> {
     print(sdate.millisecondsSinceEpoch);
     // return;
     PeriodModel model = PeriodModel(sdate.millisecondsSinceEpoch);
+
+    DatabaseReference databaseReference = FirebaseDatabase.instance.reference()
+        .child("Period").child(FirebaseAuth.instance.currentUser!.uid);
+
+    databaseReference.set(model.toMap()).then((value){
+      // Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (ctx)=> Home()), (route) => false);
+
+      Navigator.pushAndRemoveUntil(
+          context, MaterialPageRoute(builder: (BuildContext context) => CheckData()),
+          ModalRoute.withName('/'));
+    }).catchError((error){
+      setState(() {
+        isadding = false;
+      });
+
+      Fluttertoast.showToast(msg: "Something went wrong");
+    });
+
+    return;
+
     await firestore.collection('Period').doc(FirebaseAuth.instance.currentUser!.uid)
         .set(model.toMap()).then((value) => {
       Navigator.pushAndRemoveUntil(
@@ -46,17 +68,6 @@ class _LastPeriodScreenState extends State<LastPeriodScreen> {
           sdate = newDateTime;
         },
       ),
-    );
-    return CalendarDatePicker(
-      firstDate: DateTime.now().subtract(Duration(days: 30)),
-      lastDate: DateTime.now(),
-      initialDate: DateTime.now(),
-
-      onDateChanged: (date) {
-        print(DateFormat('dd-MM-yyyy').format(date));
-        sdate = date;//.add(Duration(days: 1));
-      },
-
     );
   }
   bool isadding = false;

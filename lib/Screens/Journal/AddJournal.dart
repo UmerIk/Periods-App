@@ -88,9 +88,12 @@ class _AddJournalState extends State<AddJournal> {
               ),
               Card(
                 elevation: 3,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
                 margin: EdgeInsets.only(top: height * 0.01 , left: width * 0.01 , right: width * 0.01),
                 child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: width * 0.03),
+                  padding: EdgeInsets.symmetric(horizontal: width * 0.04),
                   child: TextField(
                     decoration: InputDecoration(
                       border: InputBorder.none,
@@ -103,9 +106,12 @@ class _AddJournalState extends State<AddJournal> {
               Expanded(
                 child: Card(
                   elevation: 3,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
                   margin: EdgeInsets.symmetric(vertical: height * 0.02 , horizontal: width * 0.01),
                   child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: width * 0.03),
+                    padding: EdgeInsets.symmetric(horizontal: width * 0.04),
                     child: TextField(
                       controller: desc,
                       keyboardType: TextInputType.multiline,
@@ -126,8 +132,8 @@ class _AddJournalState extends State<AddJournal> {
                     shape: StadiumBorder()
                   ),
                   onPressed: () {
-                    if(_image == null && titlec.text.trim().isEmpty && desc.text.trim().isEmpty){
-                      Fluttertoast.showToast(msg: 'You cannot save empty journal',textColor: Colors.white,backgroundColor: Colors.red);
+                    if(titlec.text.trim().isEmpty){
+                      Fluttertoast.showToast(msg: 'Please enter a title',textColor: Colors.white,backgroundColor: Colors.red);
                     }else{
                       Functions().showLoaderDialog(context);
                       if(_image != null){

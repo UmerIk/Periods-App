@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebasestorage;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -60,10 +61,23 @@ class _BuildProfileScreenState extends State<BuildProfileScreen> {
         emailcontroller.text.trim() : FirebaseAuth.instance.currentUser!.email!
         , namecontroller.text.trim() ,
         formattedDate ,  url);
+
+    DatabaseReference databaseReference = FirebaseDatabase.instance.reference()
+        .child("Users").child(uid);
+
+    databaseReference.set(model.toMap()).then((value){
+      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (ctx)=> Home()), (route) => false);
+    }).catchError((error){
+      Navigator.of(context).pop();
+      print(error);
+      Fluttertoast.showToast(msg: "Something went wrong");
+    });
+
+    return;
     firestore.collection('Users').doc(uid).set(model.toMap())
         .then((value){
 
-          Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (ctx)=> Home()), (route) => false);
+
           print('userAdded');
         })
         .catchError((error){

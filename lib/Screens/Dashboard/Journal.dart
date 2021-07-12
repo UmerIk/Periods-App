@@ -152,7 +152,7 @@ class JournalWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(20)
         ),
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: width * 0.04 , vertical: height * 0.01),
+          padding: EdgeInsets.symmetric(horizontal: width * 0.04 , vertical: height * 0.02),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -161,7 +161,7 @@ class JournalWidget extends StatelessWidget {
                 fontFamily: 'fb',
                 fontSize: 15,
               ),),
-              SizedBox(height: height * 0.01,),
+              SizedBox(height: height * 0.005,),
               Text(DateFormat('dd MMM,yyyy').format(DateTime.fromMillisecondsSinceEpoch(model.date)),
                 style: TextStyle(
                   color: Colors.black,

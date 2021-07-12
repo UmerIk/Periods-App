@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:teish/Extras/CustomColors.dart';
@@ -66,7 +67,7 @@ class HomeScreen extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: width * 0.03 , vertical: height * 0.015),
                 child: Column(
                   children: [
-                    Text('Learn about your cycle',
+                    Text('Align with your cycle',
                         style: TextStyle(
                           color: CColors.textblack,
                           fontFamily: 'fb',
@@ -157,23 +158,31 @@ class HomeScreen extends StatelessWidget {
       }
     );
   }
-
   Widget detail(){
     DocumentReference ref = FirebaseFirestore.instance.collection('Period')
         .doc(FirebaseAuth.instance.currentUser!.uid);
-    return StreamBuilder<DocumentSnapshot>(
-      stream: ref.snapshots(),
+
+
+    var databaseReference = FirebaseDatabase.instance.reference()
+        .child("Period").child(FirebaseAuth.instance.currentUser!.uid);
+
+
+    return StreamBuilder<Event>(
+      stream: databaseReference.onValue,
       builder: (context, snapshot) {
         if(snapshot.hasError){
           return Center(child: Text('${snapshot.error.toString()}'),);
         }else if(snapshot.connectionState == ConnectionState.waiting){
           return Center(child: CircularProgressIndicator(),);
         }
-        else if(!snapshot.hasData || !snapshot.data!.exists){
+        else if(!snapshot.hasData){
           return Center(child: Text('No data found'),);
         }else{
 
-          PeriodModel model = PeriodModel.fromMap(snapshot.data!.data() as Map<String , dynamic>);
+          print(snapshot.data!.snapshot.value);
+
+          // snapshot.data!.snapshot.value as Map<String, dynamic>;
+          PeriodModel model = PeriodModel.fromMap(snapshot.data!.snapshot.value as Map<dynamic, dynamic>);
 
           DateTime d = DateTime.now();
 
@@ -181,7 +190,8 @@ class HomeScreen extends StatelessWidget {
 
           int cycle = model.iwinter + model.ispring + model.isummer + model.ifall;
           print((d.difference(cd).inDays) );
-          int diff = (d.difference(cd).inDays + 1) % cycle;
+          int days = (d.difference(cd).inDays + 1);
+          int diff = days % cycle;
 
 
           if(diff == 0){
@@ -190,7 +200,11 @@ class HomeScreen extends StatelessWidget {
           print(diff);
 
 
-
+          if(diff == 1 && days~/cycle > 0){
+            ref.update({
+              'date' : DateFormat('dd-MM-yyyy').parse(DateFormat('dd-MM-yyyy').format(d)).millisecondsSinceEpoch
+            });
+          }
 
           double percent = 0;
           if(diff <= model.iwinter){
@@ -246,7 +260,7 @@ class HomeScreen extends StatelessWidget {
               Stack(
                 children: [
                   Container(
-                    width: width,
+                    width: width * 0.9,
                     child: Image(
                       image: AssetImage('assets/images/phase.png'),
                     ),

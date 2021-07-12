@@ -4,7 +4,6 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 
 import 'package:firebase_storage/firebase_storage.dart' as firebasestorage;
@@ -199,7 +198,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-
   late double width , height;
   late UserModel model;
   String cuid = FirebaseAuth.instance.currentUser!.uid;
@@ -294,19 +292,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     padding: EdgeInsets.symmetric(horizontal: width * 0.04),
                     child: Column(
                       children: [
-                        ListTile(
-                          onTap: (){
-                            Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> Calendar()));
-                          },
-                          leading: Icon(Icons.notifications_none,color: CColors.textblack),
-                          title: Text('Calendar' , style: TextStyle(
-                            color: CColors.textblack,
-                            fontSize: 15,
-                            fontFamily: 'FuturaHeavy',
-                          ),
-                          ),
-                          trailing: Icon(Icons.arrow_forward_ios,color: CColors.textblack),
-                        ),
                         ListTile(
                           onTap: (){
                             // Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> ContractionScreen()));
@@ -431,4 +416,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
     );
   }
+
+
 }
