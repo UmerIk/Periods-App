@@ -44,4 +44,16 @@ class Functions{
       },
     );
   }
+
+  showedit(BuildContext context , Widget widget){
+    AlertDialog alert=AlertDialog(
+      content: widget,
+    );
+    showDialog(barrierDismissible: true,
+      context:context,
+      builder:(BuildContext context){
+        return alert;
+      },
+    );
+  }
 }

@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:teish/Extras/CustomColors.dart';
 import 'package:teish/Models/PeriodModel.dart';
 import 'package:teish/Models/UserModel.dart';
+import 'package:teish/Screens/Dashboard/Advice.dart';
 import 'package:teish/Screens/Others/EditPeriod.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -25,13 +26,12 @@ class HomeScreen extends StatelessWidget {
             upperRow(),
             detail(),
 
-
-
+            SizedBox(height: height * 0.02,),
             Card(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20)
               ),
-              margin: EdgeInsets.symmetric(horizontal: width * 0.01, vertical: height * 0.02),
+              margin: EdgeInsets.symmetric(horizontal: width * 0.01, vertical: height * 0.01),
               child: Container(
                 width: double.infinity,
                 padding: EdgeInsets.symmetric(horizontal: width * 0.03 , vertical: height * 0.015),
@@ -57,33 +57,51 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
             ),
-            Card(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20)
-              ),
-              margin: EdgeInsets.only(left: width * 0.01,right: width * 0.01, bottom: height * 0.02),
-              child: Container(
-                width: double.infinity,
-                padding: EdgeInsets.symmetric(horizontal: width * 0.03 , vertical: height * 0.015),
-                child: Column(
-                  children: [
-                    Text('Align with your cycle',
-                        style: TextStyle(
-                          color: CColors.textblack,
-                          fontFamily: 'fb',
-                          fontSize: 14,
-                        )
-                    ),
-                    SizedBox(height: height * 0.015,),
-                    Text('Coaching Advice',
-                        style: TextStyle(
-                          color: CColors.textblack,
-                          fontFamily: 'fh',
-                          fontSize: 22,
-                        )
-                    ),
-                  ],
+            InkWell(
+              onTap: (){
 
+                Navigator.of(context).push(MaterialPageRoute(builder: (ctx){
+                  var ind;
+                  if(percent<=.25){
+                    ind = 0;
+                  }else if(percent < 0.5){
+                    ind = 1;
+                  }else if(percent < 0.75){
+                    ind = 2;
+                  }else{
+                    ind = 3;
+                  }
+                  return Advice(ind);
+                }));
+              },
+              child: Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20)
+                ),
+                margin: EdgeInsets.only(left: width * 0.01,right: width * 0.01, bottom: height * 0.02),
+                child: Container(
+                  width: double.infinity,
+                  padding: EdgeInsets.symmetric(horizontal: width * 0.03 , vertical: height * 0.015),
+                  child: Column(
+                    children: [
+                      Text('Align with your cycle',
+                          style: TextStyle(
+                            color: CColors.textblack,
+                            fontFamily: 'fb',
+                            fontSize: 14,
+                          )
+                      ),
+                      SizedBox(height: height * 0.015,),
+                      Text('Coaching Advice',
+                          style: TextStyle(
+                            color: CColors.textblack,
+                            fontFamily: 'fh',
+                            fontSize: 22,
+                          )
+                      ),
+                    ],
+
+                  ),
                 ),
               ),
             ),
@@ -94,8 +112,11 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget upperRow(){
-    return StreamBuilder<DocumentSnapshot>(
-      stream: FirebaseFirestore.instance.collection('Users').doc(FirebaseAuth.instance.currentUser!.uid).snapshots(),
+    var databaseReference = FirebaseDatabase.instance.reference()
+        .child("Users").child(FirebaseAuth.instance.currentUser!.uid);
+
+    return StreamBuilder<Event>(
+      stream: databaseReference.onValue,
       builder: (context, snapshot) {
         if (snapshot.hasError) {
           return Text('Something went wrong');
@@ -107,7 +128,8 @@ class HomeScreen extends StatelessWidget {
           );
         }
 
-        UserModel usermodel = UserModel.fromMap(snapshot.data!.data() as Map<String , dynamic> );
+        // print();
+        UserModel usermodel = UserModel.fromMap(snapshot.data!.snapshot.value as Map<dynamic , dynamic> );
         return Card(
           elevation: 5,
           shape: RoundedRectangleBorder(
@@ -159,8 +181,8 @@ class HomeScreen extends StatelessWidget {
     );
   }
   Widget detail(){
-    DocumentReference ref = FirebaseFirestore.instance.collection('Period')
-        .doc(FirebaseAuth.instance.currentUser!.uid);
+    // DocumentReference ref = FirebaseFirestore.instance.collection('Period')
+    //     .doc(FirebaseAuth.instance.currentUser!.uid);
 
 
     var databaseReference = FirebaseDatabase.instance.reference()
@@ -175,7 +197,7 @@ class HomeScreen extends StatelessWidget {
         }else if(snapshot.connectionState == ConnectionState.waiting){
           return Center(child: CircularProgressIndicator(),);
         }
-        else if(!snapshot.hasData){
+        else if(!snapshot.hasData || snapshot.data!.snapshot.value == null){
           return Center(child: Text('No data found'),);
         }else{
 
@@ -201,12 +223,13 @@ class HomeScreen extends StatelessWidget {
 
 
           if(diff == 1 && days~/cycle > 0){
-            ref.update({
+            databaseReference.update({
               'date' : DateFormat('dd-MM-yyyy').parse(DateFormat('dd-MM-yyyy').format(d)).millisecondsSinceEpoch
             });
           }
 
-          double percent = 0;
+
+          percent = 0;
           if(diff <= model.iwinter){
             if(diff == model.iwinter){
               percent = 0.25;
@@ -257,95 +280,110 @@ class HomeScreen extends StatelessWidget {
 
           return Column(
             children: [
-              Stack(
-                children: [
-                  Container(
-                    width: width * 0.9,
-                    child: Image(
-                      image: AssetImage('assets/images/phase.png'),
-                    ),
-                  ),
 
-                  Positioned.fill(
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: RotationTransition(
-                        turns: AlwaysStoppedAnimation(
-                            percent
+              Container(
+                margin: EdgeInsets.symmetric(vertical: height * 0.03),
+                child: Stack(
+                  children: [
+                    RotationTransition(
+                      turns: AlwaysStoppedAnimation(
+                          // percent
+                        percent
+                      ),
+                      child: Container(
+                        width: width * 0.85,
+                        child: Image(
+                          image: AssetImage('assets/images/phase.png'),
                         ),
-                        child: Container(
-                          width: width * 0.45,
-                          child: Image(
-                            image: AssetImage('assets/images/pointer.png'),
+                      ),
+                    ),
+
+                    Positioned.fill(
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: RotationTransition(
+                          turns: AlwaysStoppedAnimation(
+                              0
+                          ),
+                          child: Container(
+                            width: width * 0.45,
+                            child: Image(
+                              image: AssetImage('assets/images/pointer.png'),
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  Positioned.fill(child: Align(
-                    alignment: Alignment.center,
-                    child: ClipOval(
-                      child: Container(
-                        width: width * 0.4,
-                        height: width * 0.4,
-                        decoration: BoxDecoration(
-                          color: CColors.blue,
-                          shape: BoxShape.circle,
-                        ),
-                        alignment: Alignment.center,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            SizedBox(),
-                            Text('Inner Winter',style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: 'fm',
-                                fontSize: width * 0.03
-                            ),),
-                            DottedLine(
-                              dashColor: Colors.white,
-                            ),
-                            Column(
-                              children: [
-                                Text('Day $diff',style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: 'fh',
-                                  fontSize: width * .05,
-                                ),),
-                                SizedBox(height: height * 0.01,),
-                                Text(DateFormat('EEEE | MMMM dd').format(DateTime.now()),style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: 'fm',
-                                  fontSize: width * .03,
-                                ),),
+                    Positioned.fill(child: Align(
+                      alignment: Alignment.center,
+                      child: ClipOval(
+                        child: Container(
+                          width: width * 0.4,
+                          height: width * 0.4,
+                          decoration: BoxDecoration(
+                            color: CColors.blue,
+                            shape: BoxShape.circle,
+                          ),
+                          alignment: Alignment.center,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              SizedBox(),
+                              Text(percent <= 0.25 ? 'Inner Winter'
+                                : percent <= 0.5 ? 'Inner Spring'
+                                : percent <= 0.75 ? 'Inner Summer'
+                                  : 'Inner Fall'
 
-
-                              ],
-                            ),
-                            DottedLine(
-                              dashColor: Colors.white,
-                            ),
-
-                            InkWell(
-                              onTap: (){
-                                Navigator.of(context).push(MaterialPageRoute(builder: (ctx){
-                                  return EditPeriod(model);
-                                }));
-                              },
-                              child: Text('Tap to change',style: TextStyle(
+                                ,style: TextStyle(
                                   color: Colors.white,
                                   fontFamily: 'fm',
                                   fontSize: width * 0.03
                               ),),
-                            ),
+                              DottedLine(
+                                dashColor: Colors.white,
+                              ),
+                              Column(
+                                children: [
+                                  Text('Day $diff',style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: 'fh',
+                                    fontSize: width * .05,
+                                  ),),
+                                  SizedBox(height: height * 0.01,),
+                                  Text(DateFormat('EEEE | MMMM dd').format(DateTime.now()),style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: 'fm',
+                                    fontSize: width * .03,
+                                  ),),
 
-                            SizedBox(),
-                          ],
+
+                                ],
+                              ),
+                              DottedLine(
+                                dashColor: Colors.white,
+                              ),
+
+                              InkWell(
+                                onTap: (){
+                                  Navigator.of(context).push(MaterialPageRoute(builder: (ctx){
+                                    return EditPeriod(model);
+                                  }));
+                                },
+                                child: Text('Tap to change',style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: 'fm',
+                                    fontSize: width * 0.03
+                                ),),
+                              ),
+
+                              SizedBox(),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  )),
-                ],
+                    )),
+                  ],
+                ),
               ),
               Text('Day $diff of your cycle',style: TextStyle(
                   color: CColors.textblack,
@@ -359,4 +397,7 @@ class HomeScreen extends StatelessWidget {
       }
     );
   }
+
+  double percent = 0;
+
 }

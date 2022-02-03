@@ -7,16 +7,15 @@ INJECTED from D:\AndroidStudioProjects\teish\android\app\src\main\AndroidManifes
 MERGED from [:firebase_auth] D:\AndroidStudioProjects\teish\build\firebase_auth\intermediates\merged_manifest\release\AndroidManifest.xml:2:1-15:12
 MERGED from [:firebase_database] D:\AndroidStudioProjects\teish\build\firebase_database\intermediates\merged_manifest\release\AndroidManifest.xml:2:1-15:12
 MERGED from [:firebase_storage] D:\AndroidStudioProjects\teish\build\firebase_storage\intermediates\merged_manifest\release\AndroidManifest.xml:2:1-15:12
-MERGED from [:cloud_firestore] D:\AndroidStudioProjects\teish\build\cloud_firestore\intermediates\merged_manifest\release\AndroidManifest.xml:2:1-15:12
 MERGED from [:firebase_core] D:\AndroidStudioProjects\teish\build\firebase_core\intermediates\merged_manifest\release\AndroidManifest.xml:2:1-15:12
 MERGED from [:images_picker] D:\AndroidStudioProjects\teish\build\images_picker\intermediates\merged_manifest\release\AndroidManifest.xml:2:1-13:12
+MERGED from [:shared_preferences] D:\AndroidStudioProjects\teish\build\shared_preferences\intermediates\merged_manifest\release\AndroidManifest.xml:2:1-7:12
 MERGED from [:flutter_local_notifications] D:\AndroidStudioProjects\teish\build\flutter_local_notifications\intermediates\merged_manifest\release\AndroidManifest.xml:2:1-23:12
 MERGED from [:fluttertoast] D:\AndroidStudioProjects\teish\build\fluttertoast\intermediates\merged_manifest\release\AndroidManifest.xml:2:1-7:12
 MERGED from [:url_launcher] D:\AndroidStudioProjects\teish\build\url_launcher\intermediates\merged_manifest\release\AndroidManifest.xml:2:1-14:12
 MERGED from [:workmanager] D:\AndroidStudioProjects\teish\build\workmanager\intermediates\merged_manifest\release\AndroidManifest.xml:2:1-7:12
 MERGED from [:add_2_calendar] D:\AndroidStudioProjects\teish\build\add_2_calendar\intermediates\merged_manifest\release\AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.firebase:firebase-auth:21.0.1] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\a0476a2be8d14e3ad542ecca6723be5f\jetified-firebase-auth-21.0.1\AndroidManifest.xml:17:1-83:12
-MERGED from [com.google.firebase:firebase-firestore:23.0.1] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\addbe6d6f42c8b11ef206b567cfbb167\jetified-firebase-firestore-23.0.1\AndroidManifest.xml:2:1-26:12
 MERGED from [com.google.firebase:firebase-storage:20.0.0] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\7da7c4c2c55b95311fa7d99f1119567e\jetified-firebase-storage-20.0.0\AndroidManifest.xml:15:1-39:12
 MERGED from [com.google.firebase:firebase-database:20.0.0] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\5a604b06f384fce5a51279271efda689\jetified-firebase-database-20.0.0\AndroidManifest.xml:15:1-38:12
 MERGED from [com.google.firebase:firebase-auth-interop:20.0.0] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\7f8dcb66f48cf92c9024b7ea7d78f7da\jetified-firebase-auth-interop-20.0.0\AndroidManifest.xml:2:1-10:12
@@ -77,10 +76,8 @@ MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\hamza\.gradle\
 MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\76dc6ba3c9271c66c4373d89457ee185\interpolator-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\47a60da7c5f452bf21710dc49e5d67a4\documentfile-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.print:print:1.0.0] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\a3379b634ecf73a1ce32826ffdb9d38b\print-1.0.0\AndroidManifest.xml:17:1-22:12
-MERGED from [io.grpc:grpc-android:1.28.0] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\61b06f4e982d0dcb3b49d2e9482a978f\jetified-grpc-android-1.28.0\AndroidManifest.xml:2:1-13:12
 MERGED from [com.jakewharton.threetenabp:threetenabp:1.2.3] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\8b3731da216f28dbdb83ee964b055502\jetified-threetenabp-1.2.3\AndroidManifest.xml:2:1-9:12
 MERGED from [androidx.annotation:annotation-experimental:1.1.0] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\9f525c2041a096354d03fae113f23ca8\jetified-annotation-experimental-1.1.0\AndroidManifest.xml:17:1-24:12
-MERGED from [com.google.firebase:protolite-well-known-types:18.0.0] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\8016bc4e6c8f474b527102cdd44e1466\jetified-protolite-well-known-types-18.0.0\AndroidManifest.xml:2:1-11:12
 INJECTED from D:\AndroidStudioProjects\teish\android\app\src\main\AndroidManifest.xml:1:1-44:12
 INJECTED from D:\AndroidStudioProjects\teish\android\app\src\main\AndroidManifest.xml:1:1-44:12
 INJECTED from D:\AndroidStudioProjects\teish\android\app\src\main\AndroidManifest.xml:1:1-44:12
@@ -114,8 +111,6 @@ MERGED from [:firebase_database] D:\AndroidStudioProjects\teish\build\firebase_d
 MERGED from [:firebase_database] D:\AndroidStudioProjects\teish\build\firebase_database\intermediates\merged_manifest\release\AndroidManifest.xml:7:5-13:19
 MERGED from [:firebase_storage] D:\AndroidStudioProjects\teish\build\firebase_storage\intermediates\merged_manifest\release\AndroidManifest.xml:7:5-13:19
 MERGED from [:firebase_storage] D:\AndroidStudioProjects\teish\build\firebase_storage\intermediates\merged_manifest\release\AndroidManifest.xml:7:5-13:19
-MERGED from [:cloud_firestore] D:\AndroidStudioProjects\teish\build\cloud_firestore\intermediates\merged_manifest\release\AndroidManifest.xml:7:5-13:19
-MERGED from [:cloud_firestore] D:\AndroidStudioProjects\teish\build\cloud_firestore\intermediates\merged_manifest\release\AndroidManifest.xml:7:5-13:19
 MERGED from [:firebase_core] D:\AndroidStudioProjects\teish\build\firebase_core\intermediates\merged_manifest\release\AndroidManifest.xml:7:5-13:19
 MERGED from [:firebase_core] D:\AndroidStudioProjects\teish\build\firebase_core\intermediates\merged_manifest\release\AndroidManifest.xml:7:5-13:19
 MERGED from [:flutter_local_notifications] D:\AndroidStudioProjects\teish\build\flutter_local_notifications\intermediates\merged_manifest\release\AndroidManifest.xml:11:5-21:19
@@ -124,8 +119,6 @@ MERGED from [:url_launcher] D:\AndroidStudioProjects\teish\build\url_launcher\in
 MERGED from [:url_launcher] D:\AndroidStudioProjects\teish\build\url_launcher\intermediates\merged_manifest\release\AndroidManifest.xml:7:5-12:19
 MERGED from [com.google.firebase:firebase-auth:21.0.1] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\a0476a2be8d14e3ad542ecca6723be5f\jetified-firebase-auth-21.0.1\AndroidManifest.xml:26:5-81:19
 MERGED from [com.google.firebase:firebase-auth:21.0.1] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\a0476a2be8d14e3ad542ecca6723be5f\jetified-firebase-auth-21.0.1\AndroidManifest.xml:26:5-81:19
-MERGED from [com.google.firebase:firebase-firestore:23.0.1] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\addbe6d6f42c8b11ef206b567cfbb167\jetified-firebase-firestore-23.0.1\AndroidManifest.xml:16:5-24:19
-MERGED from [com.google.firebase:firebase-firestore:23.0.1] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\addbe6d6f42c8b11ef206b567cfbb167\jetified-firebase-firestore-23.0.1\AndroidManifest.xml:16:5-24:19
 MERGED from [com.google.firebase:firebase-storage:20.0.0] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\7da7c4c2c55b95311fa7d99f1119567e\jetified-firebase-storage-20.0.0\AndroidManifest.xml:29:5-37:19
 MERGED from [com.google.firebase:firebase-storage:20.0.0] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\7da7c4c2c55b95311fa7d99f1119567e\jetified-firebase-storage-20.0.0\AndroidManifest.xml:29:5-37:19
 MERGED from [com.google.firebase:firebase-database:20.0.0] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\5a604b06f384fce5a51279271efda689\jetified-firebase-database-20.0.0\AndroidManifest.xml:28:5-36:19
@@ -222,12 +215,12 @@ MERGED from [:firebase_database] D:\AndroidStudioProjects\teish\build\firebase_d
 MERGED from [:firebase_database] D:\AndroidStudioProjects\teish\build\firebase_database\intermediates\merged_manifest\release\AndroidManifest.xml:5:5-44
 MERGED from [:firebase_storage] D:\AndroidStudioProjects\teish\build\firebase_storage\intermediates\merged_manifest\release\AndroidManifest.xml:5:5-44
 MERGED from [:firebase_storage] D:\AndroidStudioProjects\teish\build\firebase_storage\intermediates\merged_manifest\release\AndroidManifest.xml:5:5-44
-MERGED from [:cloud_firestore] D:\AndroidStudioProjects\teish\build\cloud_firestore\intermediates\merged_manifest\release\AndroidManifest.xml:5:5-44
-MERGED from [:cloud_firestore] D:\AndroidStudioProjects\teish\build\cloud_firestore\intermediates\merged_manifest\release\AndroidManifest.xml:5:5-44
 MERGED from [:firebase_core] D:\AndroidStudioProjects\teish\build\firebase_core\intermediates\merged_manifest\release\AndroidManifest.xml:5:5-44
 MERGED from [:firebase_core] D:\AndroidStudioProjects\teish\build\firebase_core\intermediates\merged_manifest\release\AndroidManifest.xml:5:5-44
 MERGED from [:images_picker] D:\AndroidStudioProjects\teish\build\images_picker\intermediates\merged_manifest\release\AndroidManifest.xml:5:5-44
 MERGED from [:images_picker] D:\AndroidStudioProjects\teish\build\images_picker\intermediates\merged_manifest\release\AndroidManifest.xml:5:5-44
+MERGED from [:shared_preferences] D:\AndroidStudioProjects\teish\build\shared_preferences\intermediates\merged_manifest\release\AndroidManifest.xml:5:5-44
+MERGED from [:shared_preferences] D:\AndroidStudioProjects\teish\build\shared_preferences\intermediates\merged_manifest\release\AndroidManifest.xml:5:5-44
 MERGED from [:flutter_local_notifications] D:\AndroidStudioProjects\teish\build\flutter_local_notifications\intermediates\merged_manifest\release\AndroidManifest.xml:5:5-44
 MERGED from [:flutter_local_notifications] D:\AndroidStudioProjects\teish\build\flutter_local_notifications\intermediates\merged_manifest\release\AndroidManifest.xml:5:5-44
 MERGED from [:fluttertoast] D:\AndroidStudioProjects\teish\build\fluttertoast\intermediates\merged_manifest\release\AndroidManifest.xml:5:5-44
@@ -240,8 +233,6 @@ MERGED from [:add_2_calendar] D:\AndroidStudioProjects\teish\build\add_2_calenda
 MERGED from [:add_2_calendar] D:\AndroidStudioProjects\teish\build\add_2_calendar\intermediates\merged_manifest\release\AndroidManifest.xml:5:5-44
 MERGED from [com.google.firebase:firebase-auth:21.0.1] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\a0476a2be8d14e3ad542ecca6723be5f\jetified-firebase-auth-21.0.1\AndroidManifest.xml:21:5-44
 MERGED from [com.google.firebase:firebase-auth:21.0.1] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\a0476a2be8d14e3ad542ecca6723be5f\jetified-firebase-auth-21.0.1\AndroidManifest.xml:21:5-44
-MERGED from [com.google.firebase:firebase-firestore:23.0.1] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\addbe6d6f42c8b11ef206b567cfbb167\jetified-firebase-firestore-23.0.1\AndroidManifest.xml:7:5-9:41
-MERGED from [com.google.firebase:firebase-firestore:23.0.1] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\addbe6d6f42c8b11ef206b567cfbb167\jetified-firebase-firestore-23.0.1\AndroidManifest.xml:7:5-9:41
 MERGED from [com.google.firebase:firebase-storage:20.0.0] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\7da7c4c2c55b95311fa7d99f1119567e\jetified-firebase-storage-20.0.0\AndroidManifest.xml:20:5-22:41
 MERGED from [com.google.firebase:firebase-storage:20.0.0] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\7da7c4c2c55b95311fa7d99f1119567e\jetified-firebase-storage-20.0.0\AndroidManifest.xml:20:5-22:41
 MERGED from [com.google.firebase:firebase-database:20.0.0] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\5a604b06f384fce5a51279271efda689\jetified-firebase-database-20.0.0\AndroidManifest.xml:19:5-21:41
@@ -362,14 +353,10 @@ MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\hamza\.gradle\ca
 MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\47a60da7c5f452bf21710dc49e5d67a4\documentfile-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.print:print:1.0.0] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\a3379b634ecf73a1ce32826ffdb9d38b\print-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.print:print:1.0.0] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\a3379b634ecf73a1ce32826ffdb9d38b\print-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [io.grpc:grpc-android:1.28.0] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\61b06f4e982d0dcb3b49d2e9482a978f\jetified-grpc-android-1.28.0\AndroidManifest.xml:7:5-9:41
-MERGED from [io.grpc:grpc-android:1.28.0] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\61b06f4e982d0dcb3b49d2e9482a978f\jetified-grpc-android-1.28.0\AndroidManifest.xml:7:5-9:41
 MERGED from [com.jakewharton.threetenabp:threetenabp:1.2.3] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\8b3731da216f28dbdb83ee964b055502\jetified-threetenabp-1.2.3\AndroidManifest.xml:5:5-44
 MERGED from [com.jakewharton.threetenabp:threetenabp:1.2.3] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\8b3731da216f28dbdb83ee964b055502\jetified-threetenabp-1.2.3\AndroidManifest.xml:5:5-44
 MERGED from [androidx.annotation:annotation-experimental:1.1.0] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\9f525c2041a096354d03fae113f23ca8\jetified-annotation-experimental-1.1.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.annotation:annotation-experimental:1.1.0] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\9f525c2041a096354d03fae113f23ca8\jetified-annotation-experimental-1.1.0\AndroidManifest.xml:20:5-22:41
-MERGED from [com.google.firebase:protolite-well-known-types:18.0.0] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\8016bc4e6c8f474b527102cdd44e1466\jetified-protolite-well-known-types-18.0.0\AndroidManifest.xml:7:5-9:41
-MERGED from [com.google.firebase:protolite-well-known-types:18.0.0] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\8016bc4e6c8f474b527102cdd44e1466\jetified-protolite-well-known-types-18.0.0\AndroidManifest.xml:7:5-9:41
 INJECTED from D:\AndroidStudioProjects\teish\android\app\src\main\AndroidManifest.xml
 INJECTED from D:\AndroidStudioProjects\teish\android\app\src\main\AndroidManifest.xml
 	tools:overrideLibrary
@@ -388,14 +375,10 @@ MERGED from [:firebase_database] D:\AndroidStudioProjects\teish\build\firebase_d
 MERGED from [:firebase_database] D:\AndroidStudioProjects\teish\build\firebase_database\intermediates\merged_manifest\release\AndroidManifest.xml:8:9-12:19
 MERGED from [:firebase_storage] D:\AndroidStudioProjects\teish\build\firebase_storage\intermediates\merged_manifest\release\AndroidManifest.xml:8:9-12:19
 MERGED from [:firebase_storage] D:\AndroidStudioProjects\teish\build\firebase_storage\intermediates\merged_manifest\release\AndroidManifest.xml:8:9-12:19
-MERGED from [:cloud_firestore] D:\AndroidStudioProjects\teish\build\cloud_firestore\intermediates\merged_manifest\release\AndroidManifest.xml:8:9-12:19
-MERGED from [:cloud_firestore] D:\AndroidStudioProjects\teish\build\cloud_firestore\intermediates\merged_manifest\release\AndroidManifest.xml:8:9-12:19
 MERGED from [:firebase_core] D:\AndroidStudioProjects\teish\build\firebase_core\intermediates\merged_manifest\release\AndroidManifest.xml:8:9-12:19
 MERGED from [:firebase_core] D:\AndroidStudioProjects\teish\build\firebase_core\intermediates\merged_manifest\release\AndroidManifest.xml:8:9-12:19
 MERGED from [com.google.firebase:firebase-auth:21.0.1] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\a0476a2be8d14e3ad542ecca6723be5f\jetified-firebase-auth-21.0.1\AndroidManifest.xml:74:9-80:19
 MERGED from [com.google.firebase:firebase-auth:21.0.1] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\a0476a2be8d14e3ad542ecca6723be5f\jetified-firebase-auth-21.0.1\AndroidManifest.xml:74:9-80:19
-MERGED from [com.google.firebase:firebase-firestore:23.0.1] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\addbe6d6f42c8b11ef206b567cfbb167\jetified-firebase-firestore-23.0.1\AndroidManifest.xml:17:9-23:19
-MERGED from [com.google.firebase:firebase-firestore:23.0.1] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\addbe6d6f42c8b11ef206b567cfbb167\jetified-firebase-firestore-23.0.1\AndroidManifest.xml:17:9-23:19
 MERGED from [com.google.firebase:firebase-storage:20.0.0] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\7da7c4c2c55b95311fa7d99f1119567e\jetified-firebase-storage-20.0.0\AndroidManifest.xml:30:9-36:19
 MERGED from [com.google.firebase:firebase-storage:20.0.0] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\7da7c4c2c55b95311fa7d99f1119567e\jetified-firebase-storage-20.0.0\AndroidManifest.xml:30:9-36:19
 MERGED from [com.google.firebase:firebase-database:20.0.0] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\5a604b06f384fce5a51279271efda689\jetified-firebase-database-20.0.0\AndroidManifest.xml:29:9-35:19
@@ -428,12 +411,6 @@ ADDED from [:firebase_storage] D:\AndroidStudioProjects\teish\build\firebase_sto
 		ADDED from [:firebase_storage] D:\AndroidStudioProjects\teish\build\firebase_storage\intermediates\merged_manifest\release\AndroidManifest.xml:11:17-82
 	android:name
 		ADDED from [:firebase_storage] D:\AndroidStudioProjects\teish\build\firebase_storage\intermediates\merged_manifest\release\AndroidManifest.xml:10:17-126
-meta-data#com.google.firebase.components:io.flutter.plugins.firebase.firestore.FlutterFirebaseFirestoreRegistrar
-ADDED from [:cloud_firestore] D:\AndroidStudioProjects\teish\build\cloud_firestore\intermediates\merged_manifest\release\AndroidManifest.xml:9:13-11:85
-	android:value
-		ADDED from [:cloud_firestore] D:\AndroidStudioProjects\teish\build\cloud_firestore\intermediates\merged_manifest\release\AndroidManifest.xml:11:17-82
-	android:name
-		ADDED from [:cloud_firestore] D:\AndroidStudioProjects\teish\build\cloud_firestore\intermediates\merged_manifest\release\AndroidManifest.xml:10:17-134
 meta-data#com.google.firebase.components:io.flutter.plugins.firebase.core.FlutterFirebaseCoreRegistrar
 ADDED from [:firebase_core] D:\AndroidStudioProjects\teish\build\firebase_core\intermediates\merged_manifest\release\AndroidManifest.xml:9:13-11:85
 	android:value
@@ -460,8 +437,6 @@ uses-permission#android.permission.INTERNET
 ADDED from [:images_picker] D:\AndroidStudioProjects\teish\build\images_picker\intermediates\merged_manifest\release\AndroidManifest.xml:11:5-67
 MERGED from [com.google.firebase:firebase-auth:21.0.1] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\a0476a2be8d14e3ad542ecca6723be5f\jetified-firebase-auth-21.0.1\AndroidManifest.xml:23:5-67
 MERGED from [com.google.firebase:firebase-auth:21.0.1] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\a0476a2be8d14e3ad542ecca6723be5f\jetified-firebase-auth-21.0.1\AndroidManifest.xml:23:5-67
-MERGED from [com.google.firebase:firebase-firestore:23.0.1] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\addbe6d6f42c8b11ef206b567cfbb167\jetified-firebase-firestore-23.0.1\AndroidManifest.xml:14:5-67
-MERGED from [com.google.firebase:firebase-firestore:23.0.1] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\addbe6d6f42c8b11ef206b567cfbb167\jetified-firebase-firestore-23.0.1\AndroidManifest.xml:14:5-67
 MERGED from [com.google.firebase:firebase-storage:20.0.0] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\7da7c4c2c55b95311fa7d99f1119567e\jetified-firebase-storage-20.0.0\AndroidManifest.xml:27:5-67
 MERGED from [com.google.firebase:firebase-storage:20.0.0] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\7da7c4c2c55b95311fa7d99f1119567e\jetified-firebase-storage-20.0.0\AndroidManifest.xml:27:5-67
 MERGED from [com.google.firebase:firebase-database:20.0.0] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\5a604b06f384fce5a51279271efda689\jetified-firebase-database-20.0.0\AndroidManifest.xml:26:5-67
@@ -518,16 +493,12 @@ ADDED from [:url_launcher] D:\AndroidStudioProjects\teish\build\url_launcher\int
 		ADDED from [:url_launcher] D:\AndroidStudioProjects\teish\build\url_launcher\intermediates\merged_manifest\release\AndroidManifest.xml:9:13-74
 uses-permission#android.permission.ACCESS_NETWORK_STATE
 ADDED from [com.google.firebase:firebase-auth:21.0.1] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\a0476a2be8d14e3ad542ecca6723be5f\jetified-firebase-auth-21.0.1\AndroidManifest.xml:24:5-79
-MERGED from [com.google.firebase:firebase-firestore:23.0.1] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\addbe6d6f42c8b11ef206b567cfbb167\jetified-firebase-firestore-23.0.1\AndroidManifest.xml:13:5-79
-MERGED from [com.google.firebase:firebase-firestore:23.0.1] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\addbe6d6f42c8b11ef206b567cfbb167\jetified-firebase-firestore-23.0.1\AndroidManifest.xml:13:5-79
 MERGED from [com.google.firebase:firebase-storage:20.0.0] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\7da7c4c2c55b95311fa7d99f1119567e\jetified-firebase-storage-20.0.0\AndroidManifest.xml:26:5-79
 MERGED from [com.google.firebase:firebase-storage:20.0.0] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\7da7c4c2c55b95311fa7d99f1119567e\jetified-firebase-storage-20.0.0\AndroidManifest.xml:26:5-79
 MERGED from [com.google.firebase:firebase-database:20.0.0] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\5a604b06f384fce5a51279271efda689\jetified-firebase-database-20.0.0\AndroidManifest.xml:25:5-79
 MERGED from [com.google.firebase:firebase-database:20.0.0] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\5a604b06f384fce5a51279271efda689\jetified-firebase-database-20.0.0\AndroidManifest.xml:25:5-79
 MERGED from [androidx.work:work-runtime:2.4.0] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\593a0b3b6d350c6b9915bf7b49066be7\work-runtime-2.4.0\AndroidManifest.xml:26:5-79
 MERGED from [androidx.work:work-runtime:2.4.0] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\593a0b3b6d350c6b9915bf7b49066be7\work-runtime-2.4.0\AndroidManifest.xml:26:5-79
-MERGED from [io.grpc:grpc-android:1.28.0] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\61b06f4e982d0dcb3b49d2e9482a978f\jetified-grpc-android-1.28.0\AndroidManifest.xml:11:5-79
-MERGED from [io.grpc:grpc-android:1.28.0] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\61b06f4e982d0dcb3b49d2e9482a978f\jetified-grpc-android-1.28.0\AndroidManifest.xml:11:5-79
 	android:name
 		ADDED from [com.google.firebase:firebase-auth:21.0.1] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\a0476a2be8d14e3ad542ecca6723be5f\jetified-firebase-auth-21.0.1\AndroidManifest.xml:24:22-76
 activity#com.google.firebase.auth.internal.GenericIdpActivity
@@ -598,12 +569,6 @@ ADDED from [com.google.firebase:firebase-auth:21.0.1] C:\Users\hamza\.gradle\cac
 		ADDED from [com.google.firebase:firebase-auth:21.0.1] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\a0476a2be8d14e3ad542ecca6723be5f\jetified-firebase-auth-21.0.1\AndroidManifest.xml:79:17-82
 	android:name
 		ADDED from [com.google.firebase:firebase-auth:21.0.1] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\a0476a2be8d14e3ad542ecca6723be5f\jetified-firebase-auth-21.0.1\AndroidManifest.xml:78:17-109
-meta-data#com.google.firebase.components:com.google.firebase.firestore.FirestoreRegistrar
-ADDED from [com.google.firebase:firebase-firestore:23.0.1] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\addbe6d6f42c8b11ef206b567cfbb167\jetified-firebase-firestore-23.0.1\AndroidManifest.xml:20:13-22:85
-	android:value
-		ADDED from [com.google.firebase:firebase-firestore:23.0.1] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\addbe6d6f42c8b11ef206b567cfbb167\jetified-firebase-firestore-23.0.1\AndroidManifest.xml:22:17-82
-	android:name
-		ADDED from [com.google.firebase:firebase-firestore:23.0.1] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\addbe6d6f42c8b11ef206b567cfbb167\jetified-firebase-firestore-23.0.1\AndroidManifest.xml:21:17-111
 meta-data#com.google.firebase.components:com.google.firebase.storage.StorageRegistrar
 ADDED from [com.google.firebase:firebase-storage:20.0.0] C:\Users\hamza\.gradle\caches\transforms-2\files-2.1\7da7c4c2c55b95311fa7d99f1119567e\jetified-firebase-storage-20.0.0\AndroidManifest.xml:33:13-35:85
 	android:value

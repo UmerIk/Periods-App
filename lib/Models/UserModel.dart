@@ -4,7 +4,7 @@ class UserModel{
 
   UserModel(this.id, this.password, this.email, this.name, this.dateofbirth , this.image);
 
-  UserModel.fromMap(Map<String , dynamic> data){
+  UserModel.fromMap(Map<dynamic , dynamic> data){
     id = data['id'];
     email = data['email'];
     name = data['name'];

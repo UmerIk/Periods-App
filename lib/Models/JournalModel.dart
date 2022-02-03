@@ -4,7 +4,7 @@ class JournalModel{
 
   JournalModel(this.title, this.image, this.key, this.description, this.date);
 
-  JournalModel.fromMap(Map<String , dynamic> data){
+  JournalModel.fromMap(Map<dynamic , dynamic> data){
     title = data['title'];
     image = data['image'];
     key = data['key'];

@@ -1,7 +1,7 @@
 import 'dart:core';
 import 'dart:io';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -53,7 +53,7 @@ class _BuildProfileScreenState extends State<BuildProfileScreen> {
     }
 
   }
-  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  // FirebaseFirestore firestore = FirebaseFirestore.instance;
   Future addUser() async{
     UserModel model = UserModel(
         uid ,  passwordcontroller.text.trim() ,
@@ -66,25 +66,12 @@ class _BuildProfileScreenState extends State<BuildProfileScreen> {
         .child("Users").child(uid);
 
     databaseReference.set(model.toMap()).then((value){
-      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (ctx)=> Home()), (route) => false);
+      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (ctx)=> CheckData()), (route) => false);
     }).catchError((error){
       Navigator.of(context).pop();
       print(error);
       Fluttertoast.showToast(msg: "Something went wrong");
     });
-
-    return;
-    firestore.collection('Users').doc(uid).set(model.toMap())
-        .then((value){
-
-
-          print('userAdded');
-        })
-        .catchError((error){
-          Navigator.of(context).pop();
-          print(error);
-          Fluttertoast.showToast(msg: "Something went wrong");
-        });
   }
   File? _image;
   Future getImage() async {

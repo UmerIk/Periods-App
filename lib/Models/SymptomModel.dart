@@ -4,7 +4,7 @@ class SymptomModel{
 
   SymptomModel(this.key, this.note, this.symptom, this.sex, this.vd, this.mood , this.date);
 
-  SymptomModel.fromData(Map<String , dynamic> data){
+  SymptomModel.fromData(Map<dynamic , dynamic> data){
    key = data["key"];
    note = data["note"];
    date = data["date"];

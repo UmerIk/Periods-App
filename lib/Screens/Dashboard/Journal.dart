@@ -1,5 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -11,7 +11,7 @@ import 'package:teish/Screens/Journal/JournalDetail.dart';
 class JournalScreen extends StatelessWidget {
 
   late double width , height;
-
+  List<JournalModel> jlist = [];
   @override
   Widget build(BuildContext context) {
     width = MediaQuery.of(context).size.width;
@@ -27,11 +27,8 @@ class JournalScreen extends StatelessWidget {
         child: Column(
           children: [
             Expanded(
-                child: StreamBuilder<QuerySnapshot>(
-                  stream: FirebaseFirestore.instance
-                      .collection('Users').doc(FirebaseAuth.instance.currentUser!.uid)
-                      .collection('Journal')
-                      .orderBy("date" , descending: true).snapshots(),
+                child: StreamBuilder<Event>(
+                  stream: ref.onValue,
                   builder: (context, snapshot) {
                     if(snapshot.hasError){
                       FirebaseException e = snapshot.error as FirebaseException;
@@ -47,7 +44,7 @@ class JournalScreen extends StatelessWidget {
                       return Center(
                         child: CircularProgressIndicator(),
                       );
-                    }else if(!snapshot.hasData || snapshot.data!.size ==0){
+                    }else if(!snapshot.hasData || snapshot.data!.snapshot.value ==null ){
                       return Center(
                         child: Text('No data found',
                           style: TextStyle(
@@ -59,14 +56,23 @@ class JournalScreen extends StatelessWidget {
                     }
 
                     List<JournalModel> jlist = [];
-                    snapshot.data!.docs.forEach((element) {
-                      JournalModel model = JournalModel.fromMap(element.data() as Map<String , dynamic>);
+                    Map<dynamic, dynamic> values = snapshot.data!.snapshot.value;
+                    values.forEach((key, value) {
+                      print(key);
+                      print(value);
+                      JournalModel model = JournalModel.fromMap(value as Map<dynamic , dynamic>);
                       jlist.add(model);
                     });
+
+                    this.jlist = jlist.reversed.toList();
+                    // snapshot.data!.docs.forEach((element) {
+                    //   JournalModel model = JournalModel.fromMap(element.data() as Map<String , dynamic>);
+                    //   jlist.add(model);
+                    // });
                     return ListView.builder(itemBuilder: (ctx, i){
-                      return JournalWidget(jlist[i]);
+                      return JournalWidget(this.jlist[i]);
                     },
-                      itemCount: jlist.length,
+                      itemCount: this.jlist.length,
                     );
                   }
                 )
@@ -97,7 +103,7 @@ class JournalScreen extends StatelessWidget {
             ),),
 
             Container(
-              height: 200,
+              height: 300,
               margin: EdgeInsets.symmetric(vertical: height * 0.01),
               child: CupertinoDatePicker(
                 mode: CupertinoDatePickerMode.date,
@@ -111,27 +117,32 @@ class JournalScreen extends StatelessWidget {
 
             Container(
               width: double.infinity,
-              child: Align(
-                alignment: Alignment.center,
-                child: ElevatedButton(
-                  onPressed: (){
-                    Navigator.of(context).pop();
+              child: ElevatedButton(
+                onPressed: (){
+                  Navigator.of(context).pop();
 
-                    Navigator.of(context).push(MaterialPageRoute(builder: (ctx){
-                      return AddJournal(dateTime);
-                    }));
+                  Navigator.of(context).push(MaterialPageRoute(builder: (ctx){
+                    return AddJournal(dateTime);
+                  }));
 
-                  },
-                  child: Text('Submit' , style: TextStyle(
-                    color: Colors.white,
-                  ),),
-                ),
+                },
+                child: Text('Submit' , style: TextStyle(
+                  color: Colors.white,
+                ),),
               ),
             )
           ],
         ),
       ),);
   }
+
+  var ref = FirebaseDatabase.instance.reference().child("Users")
+      .child(FirebaseAuth.instance.currentUser!.uid).child("Journal").orderByChild("date");
+
+// FirebaseFirestore.instance
+//     .collection('Users').doc(FirebaseAuth.instance.currentUser!.uid)
+//     .collection('Journal')
+//     .orderBy("date" , descending: true);
 }
 class JournalWidget extends StatelessWidget {
 
@@ -176,6 +187,7 @@ class JournalWidget extends StatelessWidget {
       ),
     );
   }
+
 
 
 

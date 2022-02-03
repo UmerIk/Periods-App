@@ -1,8 +1,9 @@
 import 'dart:collection';
 
-import 'package:add_2_calendar/add_2_calendar.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:add_2_calendar/add_2_calendar.dart' as atc;
+// import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:jiffy/jiffy.dart';
@@ -19,8 +20,8 @@ class Calendar extends StatefulWidget {
 class _CalendarState extends State<Calendar> {
   late PeriodModel model;
   late double width , height;
-  DocumentReference ref = FirebaseFirestore.instance.collection('Period')
-      .doc(FirebaseAuth.instance.currentUser!.uid);
+  var databaseReference = FirebaseDatabase.instance.reference()
+      .child("Period").child(FirebaseAuth.instance.currentUser!.uid);
   @override
   Widget build(BuildContext context) {
     width = MediaQuery.of(context).size.width;
@@ -29,18 +30,20 @@ class _CalendarState extends State<Calendar> {
       body: Padding(
         padding: MediaQuery.of(context).padding,
         child: Container(
-          child: StreamBuilder<DocumentSnapshot>(
-              stream: ref.snapshots(),
+          child: StreamBuilder<Event>(
+              stream: databaseReference.onValue,
               builder: (context, snapshot) {
                 if(snapshot.hasError){
                   return Center(child: Text('${snapshot.error.toString()}'),);
                 }else if(snapshot.connectionState == ConnectionState.waiting){
                   return Center(child: CircularProgressIndicator(),);
                 }
-                else if(!snapshot.hasData || !snapshot.data!.exists){
+                else if(!snapshot.hasData || snapshot.data!.snapshot.value == null){
                   return Center(child: Text('No data found'),);
                 }else{
-                  model = PeriodModel.fromMap(snapshot.data!.data() as Map<String , dynamic>);
+                  DataSnapshot dsnapshot = snapshot.data!.snapshot;
+                  print(dsnapshot.value);
+                  model = PeriodModel.fromMap(dsnapshot.value as Map<dynamic , dynamic>);
                   return datawidget();
                 }
 
@@ -81,6 +84,8 @@ class _CalendarState extends State<Calendar> {
                           child: Image(
                               image: AssetImage('assets/icons/pre.png'),
                             width: 60,
+                            color: days == 0 ? CColors.pink : days == 1 ?
+                            CColors.blue : days == 2 ? CColors.yellow : days == 3 ? CColors.brown : CColors.darkestgray,
                           ),
                         ),
                         Expanded(
@@ -120,6 +125,8 @@ class _CalendarState extends State<Calendar> {
                           child: Image(
                             image: AssetImage('assets/icons/next.png'),
                             width: 60,
+                            color: days == 0 ? CColors.pink : days == 1 ?
+                            CColors.blue : days == 2 ? CColors.yellow : days == 3 ? CColors.brown : CColors.darkestgray,
                           ),
                         ),
 
@@ -141,7 +148,7 @@ class _CalendarState extends State<Calendar> {
             elevation: 5,
             margin: EdgeInsets.symmetric(horizontal: width * 0.04, vertical: height * 0.015),
             child: Container(
-              padding: EdgeInsets.symmetric(vertical: height * 0.015, horizontal: width * 0.03),
+              padding: EdgeInsets.symmetric(vertical: height * 0.02, horizontal: width * 0.04),
               width: double.infinity,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -201,19 +208,19 @@ class _CalendarState extends State<Calendar> {
                               days: (model.iwinter + model.ispring + model.isummer + model.ifall) - 1)
                           );
                         }
-                        Event event = Event(
+                        atc.Event event = atc.Event(
                           title: title,
                           description: '',
                           startDate: sdt,
                           endDate: edt,
-                          iosParams: IOSParams(
+                          iosParams: atc.IOSParams(
                             reminder: Duration(/* Ex. hours:1 */), // on iOS, you can set alarm notification after your event.
                           ),
-                          androidParams: AndroidParams(
+                          androidParams: atc.AndroidParams(
                             emailInvites: [], // on Android, you can add invite emails to your event.
                           ),
                         );
-                        // Add2Calendar.addEvent2Cal(event);
+                        atc.Add2Calendar.addEvent2Cal(event);
                       },
                       child: Text('Populate',
                         style: TextStyle(
@@ -276,10 +283,9 @@ class _CalendarState extends State<Calendar> {
       if(dd < 0){
         dd = 0;
       }
-      int ta = model.iwinter + model.isummer + model.ispring + model.ifall;
 
       int dayac = getday(dd, cycle);
-      if(dayac != 0 && counter < ta){
+      if(dayac != 0 && ifalldays.length < model.ifall){
         counter ++;
         if(dayac <= model.iwinter){
           iwinterdays.add(element);
@@ -295,9 +301,15 @@ class _CalendarState extends State<Calendar> {
 
     }
 
+    if(iwinterdays.isNotEmpty)
     crossdays.add(iwinterdays.last);
+    if(isummerdays.isNotEmpty)
     crossdays.add(isummerdays.last);
+
+    if(ispringdays.isNotEmpty)
     crossdays.add(ispringdays.last);
+
+    if(ifalldays.isNotEmpty)
     crossdays.add(ifalldays.last);
 
     return TableCalendar(
@@ -422,7 +434,6 @@ class _CalendarState extends State<Calendar> {
               child: new Wrap(
                 children: <Widget>[
                   new ListTile(
-                      leading: new Icon(Icons.photo_library),
                       title: new Text('Period start Date',style: TextStyle(
                           color: Colors.black
                       ),),
@@ -433,7 +444,6 @@ class _CalendarState extends State<Calendar> {
                       }),
 
                   ListTile(
-                    leading: new Icon(Icons.photo_camera),
                     title: new Text('Period end Date',style: TextStyle(
                       color: Colors.black
                     ),),
@@ -447,7 +457,6 @@ class _CalendarState extends State<Calendar> {
 
                   season != 0 && days < 9?
                   ListTile(
-                    leading: Icon(Icons.photo_camera),
                     title: Text('Move Forward',style: TextStyle(
                       color: Colors.black
                     ),),
@@ -468,7 +477,6 @@ class _CalendarState extends State<Calendar> {
                   Container(),
                   season != 0 && days > 2?
                   ListTile(
-                    leading: Icon(Icons.photo_camera),
                     title: Text('Move Backward',style: TextStyle(
                       color: Colors.black
                     ),),
@@ -498,17 +506,17 @@ class _CalendarState extends State<Calendar> {
   }
   setStart(DateTime dateTime){
     print(dateTime);
-    ref.update({
+    databaseReference.update({
       'date' : dateTime.millisecondsSinceEpoch
     });
   }
   setEnd(DateTime dateTime){
-    ref.update({
+    databaseReference.update({
       'date' : dateTime.millisecondsSinceEpoch
     });
   }
   movecrossover(int days , String season){
-    ref.update({
+    databaseReference.update({
       season : days
     });
   }

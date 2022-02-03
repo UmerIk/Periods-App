@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
@@ -16,7 +16,7 @@ class LastPeriodScreen extends StatefulWidget {
 
 class _LastPeriodScreenState extends State<LastPeriodScreen> {
 
-  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  // FirebaseFirestore firestore = FirebaseFirestore.instance;
   Future<void> addData(BuildContext context) async{
 
     print(sdate.millisecondsSinceEpoch);
@@ -36,22 +36,7 @@ class _LastPeriodScreenState extends State<LastPeriodScreen> {
       setState(() {
         isadding = false;
       });
-
       Fluttertoast.showToast(msg: "Something went wrong");
-    });
-
-    return;
-
-    await firestore.collection('Period').doc(FirebaseAuth.instance.currentUser!.uid)
-        .set(model.toMap()).then((value) => {
-      Navigator.pushAndRemoveUntil(
-          context, MaterialPageRoute(builder: (BuildContext context) => CheckData()),
-          ModalRoute.withName('/')),
-    }).catchError((error){
-      setState(() {
-        isadding = false;
-      });
-      print(error);
     });
   }
 
@@ -88,14 +73,6 @@ class _LastPeriodScreenState extends State<LastPeriodScreen> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height: height * 0.02,),
-                    GestureDetector(
-                      onTap: ()=> Navigator.of(context).pop(),
-                      child: Icon(Icons.arrow_back ,
-                        color: Colors.black,
-                        size: 30,
-                      ),
-                    ),
                     SizedBox(height: height * 0.02,),
                     Text('When did your last period start?' , style: TextStyle(
                       color: CColors.textblack,

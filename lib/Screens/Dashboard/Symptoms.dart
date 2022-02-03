@@ -1,5 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:teish/Extras/CustomColors.dart';
@@ -46,30 +46,39 @@ class _SymptomsScreenState extends State<SymptomsScreen> {
           children: [
             _tableCalendar(),
             Expanded(
-                child: StreamBuilder<QuerySnapshot>(
-                  stream: FirebaseFirestore.instance
-                      .collection('Users').doc(FirebaseAuth.instance.currentUser!.uid)
-                      .collection('Symptoms').where('date' , isEqualTo: date).snapshots(),
+                child: StreamBuilder<Event>(
+                  stream: FirebaseDatabase.instance.reference().child("Users")
+                      .child(FirebaseAuth.instance.currentUser!.uid)
+                      .child("Symptoms").child(date).onValue,
                   builder: (context, snapshot) {
                     if(snapshot.hasError){
                       FirebaseException e = snapshot.error as FirebaseException;
                       return Center(child: Text(e.message.toString()),);
                     }if(snapshot.connectionState == ConnectionState.waiting){
                       return Center(child: CircularProgressIndicator(),);
-                    }else if(snapshot.hasData && snapshot.data!.size>0){
-                      List<SymptomModel> list = [];
-                      snapshot.data!.docs.forEach((element) {
-                        SymptomModel model = SymptomModel.fromData(element.data() as Map<String , dynamic>);
-                        list.add(model);
-                      });
-                      return ListView.builder(
-                        itemBuilder: (ctx , i){
-                          return SymptomWidget(list[i]);
-                        },
-                        itemCount: list.length,
-                      );
+                    }else if(snapshot.hasData && snapshot.data!.snapshot.value != null){
+
+                      SymptomModel model = SymptomModel.fromData(snapshot.data!.snapshot.value as Map<dynamic , dynamic>);
+                      // return ListView.builder(
+                      //   itemBuilder: (ctx , i){
+                      //     return SymptomWidget(list[i]);
+                      //   },
+                      //   itemCount: list.length,
+                      // );
+                      return SymptomWidget(model);
                     }else{
-                      return Center(child: Text('No data found'),);
+                      return Center(
+                        child: Padding(
+                          padding: const EdgeInsets.all(18.0),
+                          child: Text('You didn\'t enter any record on this date, but you can enter now.',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 18,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      );
                     }
 
                   }

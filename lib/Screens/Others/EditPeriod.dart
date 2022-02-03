@@ -1,5 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
@@ -60,15 +60,12 @@ class _EditPeriodState extends State<EditPeriod> {
                           )
                       ),
 
-                      Text('Update Crossover Days',
+                      Text('Update Season Days',
                         style: TextStyle(
                           fontSize: 18,
                           fontFamily: 'fh',
-
                         ),
                       ),
-
-
                       ImageIcon(
                         AssetImage('assets/icons/back.png'
                         )
@@ -115,12 +112,11 @@ class _EditPeriodState extends State<EditPeriod> {
                                   itemWidth: width * 0.15,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(16),
-
-                                    border: Border.all(color: CColors.blue),
+                                    border: Border.all(color: CColors.pink),
                                   ),
 
                                   selectedTextStyle: TextStyle(
-                                      color: CColors.blue
+                                      color: CColors.pink
                                   ),
                                   onChanged: (value) => setState((){
                                     model.iwinter = value;
@@ -240,11 +236,11 @@ class _EditPeriodState extends State<EditPeriod> {
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(16),
 
-                                    border: Border.all(color: CColors.blue),
+                                    border: Border.all(color: CColors.yellow),
                                   ),
 
                                   selectedTextStyle: TextStyle(
-                                      color: CColors.blue
+                                      color: CColors.yellow
                                   ),
                                   onChanged: (value) => setState((){
                                     model.isummer = value;
@@ -302,11 +298,11 @@ class _EditPeriodState extends State<EditPeriod> {
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(16),
 
-                                    border: Border.all(color: CColors.blue),
+                                    border: Border.all(color: CColors.brown),
                                   ),
 
                                   selectedTextStyle: TextStyle(
-                                      color: CColors.blue
+                                      color: CColors.brown
                                   ),
                                   onChanged: (value) => setState((){
                                     model.ifall = value;
@@ -360,8 +356,8 @@ class _EditPeriodState extends State<EditPeriod> {
   update(){
     print(model.toMap());
     Functions().showLoaderDialog(context, text: "Updating data");
-    FirebaseFirestore.instance.collection('Period')
-        .doc(FirebaseAuth.instance.currentUser!.uid).update(model.toMap()).then((value){
+    FirebaseDatabase.instance.reference().child("Period")
+        .child(FirebaseAuth.instance.currentUser!.uid).update(model.toMap()).then((value){
           Navigator.of(context).pop();
           Future.delayed(Duration(milliseconds: 10)).then((value){
             Navigator.of(context).pop();

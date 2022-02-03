@@ -1,5 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -859,19 +859,23 @@ class AddSymtoms extends StatelessWidget {
   void addData(BuildContext context , DateTime dateTime){
 
     Functions().showLoaderDialog(context, text: 'Saving Symptom');
-    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+
+
+    // FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
     String uid = FirebaseAuth.instance.currentUser!.uid;
     String key = DateFormat('MMM dd,yyyy').format(dateTime);
         // firebaseFirestore.collection('Users').doc(uid).collection('Symptoms').doc().id;
 
+    var ref = FirebaseDatabase.instance.reference().child("Users")
+        .child(FirebaseAuth.instance.currentUser!.uid).child("Symptoms").child(key);
+
     SymptomModel model = SymptomModel(key, ct.text, si, sei, vdi, mi , DateFormat('MMM dd,yyyy').format(dateTime));
 
-    firebaseFirestore.collection('Users').doc(uid).collection('Symptoms')
-        .doc(key).set(model.toMap()).then((value){
-          Navigator.of(context).pop();
-          Future.delayed(Duration(milliseconds: 10)).then((value){
-            Navigator.of(context).pop();
-          });
+    ref.set(model.toMap()).then((value){
+      Navigator.of(context).pop();
+      Future.delayed(Duration(milliseconds: 10)).then((value){
+        Navigator.of(context).pop();
+      });
     }).catchError((error){
       Navigator.of(context).pop();
       FirebaseException e = error;
@@ -915,21 +919,17 @@ class AddSymtoms extends StatelessWidget {
 
               Container(
                 width: double.infinity,
-                child: Align(
-                  alignment: Alignment.center,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      shape: StadiumBorder(),
-                      padding: EdgeInsets.symmetric(horizontal: width * 0.03,vertical: height * 0.015),
-                    ),
-                    onPressed: (){
-                      Navigator.of(context).pop();
-                      addData(context , dateTime);
-                    },
-                    child: Text('Submit' , style: TextStyle(
-                      color: Colors.white,
-                    ),),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.symmetric(horizontal: width * 0.03,vertical: height * 0.015),
                   ),
+                  onPressed: (){
+                    Navigator.of(context).pop();
+                    addData(context , dateTime);
+                  },
+                  child: Text('Submit' , style: TextStyle(
+                    color: Colors.white,
+                  ),),
                 ),
               )
             ],

@@ -1,9 +1,10 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:teish/Models/PeriodModel.dart';
 import 'package:teish/Screens/Auth/BuildProfileScreen.dart';
 import 'package:teish/Screens/Auth/Checkdata.dart';
@@ -16,7 +17,7 @@ import 'Extras/CustomColors.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  await Workmanager().initialize(callbackdispatcher , isInDebugMode: true);
+  await Workmanager().initialize(callbackdispatcher , isInDebugMode: false);
   await Workmanager().registerPeriodicTask("s", "dailynoti",
     existingWorkPolicy: ExistingWorkPolicy.replace,
     frequency: Duration(hours: 1),
@@ -51,13 +52,16 @@ void callbackdispatcher(){
       return Future.value(true);
     }else{
       try{
-        var ref = await FirebaseFirestore.instance
-            .collection('Period')
-            .doc(FirebaseAuth.instance.currentUser!.uid).get();
+        var ref = await FirebaseDatabase.instance.reference()
+            .child("Period")
+            .child(FirebaseAuth.instance.currentUser!.uid).get();
 
         var value = ref;
-        if(value.exists){
-          PeriodModel model = PeriodModel.fromMap(value.data() as Map<String, dynamic>);
+        if(value == null){
+          return Future.value(false);
+        }
+        if(value.value != null){
+          PeriodModel model = PeriodModel.fromMap(value.value as Map<dynamic, dynamic>);
           List<DateTime> cdays = [];
 
           DateTime dt = DateTime.fromMillisecondsSinceEpoch(model.date);
@@ -71,9 +75,12 @@ void callbackdispatcher(){
               days: (model.iwinter + model.ispring + model.isummer + model.ifall) - 1)
           ));
 
+
+          SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+          int days = sharedPreferences.getInt("days") ?? 2;
           cdays.forEach((element) {
             int diff = element.difference(DateFormat('dd-MM-yyyy').parse(DateFormat('dd-MM-yyyy').format(DateTime.now()))).inDays;
-            if(diff <= 2 && diff > 0){
+            if(diff <= days && diff > 0){
               showNotification('Your crossover day will start in $diff days', flp);
             }
           });
@@ -109,11 +116,54 @@ class MyApp extends StatelessWidget {
 class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    gonext(context);
+    return Scaffold(
+      backgroundColor: CColors.bg,
+      body: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(
+              'assets/images/splash.png',
+            ),
+            fit: BoxFit.cover
+          ),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Image(
+              image: AssetImage('assets/images/logo.png'),
+              width: MediaQuery.of(context).size.width * 0.4,
+            ),
+            Text('your cycle is more\nimportant than your period',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: CColors.textblack,
+                fontFamily: 'fr',
+                fontSize: 25
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+
+  }
+
+  void gonext(BuildContext context) async{
+    await Future.delayed(Duration(seconds: 2));
     User? user = FirebaseAuth.instance.currentUser;
     if(user == null){
-      return BuildProfileScreen();
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx){
+        return BuildProfileScreen();
+      }));
     }else{
-      return CheckData();
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx){
+        return CheckData();
+      }));
+
     }
   }
 }

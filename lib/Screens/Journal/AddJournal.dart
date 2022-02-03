@@ -1,7 +1,8 @@
 import 'dart:io';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebasestorage;
@@ -252,16 +253,18 @@ class _AddJournalState extends State<AddJournal> {
   }
 
   void setData({String url = ''}){
-    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-    String key = firebaseFirestore.collection('Users').doc(uid).collection('Journal').doc().id;
+    // FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+    DatabaseReference reference = FirebaseDatabase.instance.reference()
+        .child("Users").child(uid).child("Journal");
+
+    String key = reference.push().key;
     JournalModel model = JournalModel(titlec.text.trim(), url, key, desc.text.trim(), widget.date.millisecondsSinceEpoch);
-    firebaseFirestore.collection('Users').doc(uid)
-        .collection('Journal').doc(key).set(model.toMap()).then((value){
-          Fluttertoast.showToast(msg: "Saved to Journal",textColor: Colors.white,backgroundColor: Colors.green);
-          Navigator.of(context).pop();
-          Future.delayed(Duration(milliseconds: 10)).then((value){
-            Navigator.of(context).pop();
-          });
+    reference.child(key).set(model.toMap()).then((value){
+      Fluttertoast.showToast(msg: "Saved to Journal",textColor: Colors.white,backgroundColor: Colors.green);
+      Navigator.of(context).pop();
+      Future.delayed(Duration(milliseconds: 10)).then((value){
+        Navigator.of(context).pop();
+      });
     }).catchError((error){
       FirebaseException exception = error;
       Fluttertoast.showToast(msg: exception.message!,textColor: Colors.white,backgroundColor: Colors.red);
