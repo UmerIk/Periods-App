@@ -216,7 +216,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       body: Container(
         height: height,
         color: CColors.bg,
-        child: StreamBuilder<Event>(
+        child: StreamBuilder<DatabaseEvent>(
           stream: databaseReference.onValue,
           builder: (context, snapshot) {
 

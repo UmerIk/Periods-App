@@ -30,7 +30,7 @@ class _CalendarState extends State<Calendar> {
       body: Padding(
         padding: MediaQuery.of(context).padding,
         child: Container(
-          child: StreamBuilder<Event>(
+          child: StreamBuilder<DatabaseEvent>(
               stream: databaseReference.onValue,
               builder: (context, snapshot) {
                 if(snapshot.hasError){

@@ -257,7 +257,7 @@ class _AddJournalState extends State<AddJournal> {
     DatabaseReference reference = FirebaseDatabase.instance.reference()
         .child("Users").child(uid).child("Journal");
 
-    String key = reference.push().key;
+    String key = reference.push().key!;
     JournalModel model = JournalModel(titlec.text.trim(), url, key, desc.text.trim(), widget.date.millisecondsSinceEpoch);
     reference.child(key).set(model.toMap()).then((value){
       Fluttertoast.showToast(msg: "Saved to Journal",textColor: Colors.white,backgroundColor: Colors.green);

@@ -15,13 +15,15 @@
     <string name="picture_confirm">확정</string>
     <string name="picture_data_exception">앨범 정보 이상 가져오기…</string>
     <string name="picture_data_null">데이터 없 음…</string>
+    <string name="picture_default_original_image">원본 이미지</string>
     <string name="picture_done">완료</string>
     <string name="picture_done_front_num">%1$d/%2$d 완료</string>
+    <string name="picture_editor">편집 하 다</string>
     <string name="picture_empty">사진을 찍거나 동영상을 찍을 수 있습니다</string>
     <string name="picture_empty_audio_title">오디오 파일 없음\n</string>
     <string name="picture_empty_title">비디오나 사진 없음\n</string>
     <string name="picture_error">이미지 손상됨</string>
-    <string name="picture_gif_tag">움직이 지도</string>
+    <string name="picture_gif_tag">gif</string>
     <string name="picture_go_setting">설치</string>
     <string name="picture_jurisdiction">메모리 카드 읽기 권한이 거부됨</string>
     <string name="picture_know">알 겠 습 니 다</string>
@@ -32,7 +34,7 @@
     <string name="picture_min_img_num">그림 선택 최소 %1$s 달러 장 이상</string>
     <string name="picture_min_video_num">최소한 비디오 선택은 %1$s 달러 자 이상이어야 합니다.</string>
     <string name="picture_not_crop_data">자른 데이터가 없습니다</string>
-    <string name="picture_original_image">원본 이미지</string>
+    <string name="picture_original_image">원본 이미지 (%1$s)</string>
     <string name="picture_pause_audio">일시 정지</string>
     <string name="picture_photo_camera">사진 찍기</string>
     <string name="picture_photo_pictures">사진 찍기 클릭</string>
@@ -61,4 +63,9 @@
     <string name="picture_video_error">비디오가 손상되었습니다</string>
     <string name="picture_video_toast">미리 볼 수 없는 동영상</string>
     <string name="picture_warning">미디어 파일 없음！</string>
+    <string name="picture_webp_tag">webp</string>
+    <string name="ucrop_gif_tag">움직이</string>
+    <string name="ucrop_label_edit_photo">사진 편집</string>
+    <string name="ucrop_label_original">원본</string>
+    <string name="ucrop_menu_crop">확인</string>
 </resources>

@@ -9,8 +9,6 @@ import 'package:teish/Models/PeriodModel.dart';
 import 'package:teish/Screens/Auth/BuildProfileScreen.dart';
 import 'package:teish/Screens/Auth/Checkdata.dart';
 import 'package:workmanager/workmanager.dart';
-// import 'package:workmanager/workmanager.dart';
-
 import 'Extras/CustomColors.dart';
 
 
@@ -30,7 +28,7 @@ showNotification(String v ,FlutterLocalNotificationsPlugin flp) async {
   var android = AndroidNotificationDetails(
     "channelId",
     "channelName",
-    "channelDescription",
+    channelDescription: "channelDescription",
     priority: Priority.high,
     importance: Importance.max,
   );

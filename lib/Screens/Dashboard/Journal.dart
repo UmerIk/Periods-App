@@ -27,7 +27,7 @@ class JournalScreen extends StatelessWidget {
         child: Column(
           children: [
             Expanded(
-                child: StreamBuilder<Event>(
+                child: StreamBuilder<DatabaseEvent>(
                   stream: ref.onValue,
                   builder: (context, snapshot) {
                     if(snapshot.hasError){
@@ -56,7 +56,7 @@ class JournalScreen extends StatelessWidget {
                     }
 
                     List<JournalModel> jlist = [];
-                    Map<dynamic, dynamic> values = snapshot.data!.snapshot.value;
+                    Map<dynamic, dynamic> values = snapshot.data!.snapshot.value as Map<dynamic, dynamic>;
                     values.forEach((key, value) {
                       print(key);
                       print(value);

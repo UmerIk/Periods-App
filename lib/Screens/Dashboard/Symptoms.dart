@@ -46,11 +46,12 @@ class _SymptomsScreenState extends State<SymptomsScreen> {
           children: [
             _tableCalendar(),
             Expanded(
-                child: StreamBuilder<Event>(
+                child: StreamBuilder<DatabaseEvent>(
                   stream: FirebaseDatabase.instance.reference().child("Users")
                       .child(FirebaseAuth.instance.currentUser!.uid)
                       .child("Symptoms").child(date).onValue,
                   builder: (context, snapshot) {
+
                     if(snapshot.hasError){
                       FirebaseException e = snapshot.error as FirebaseException;
                       return Center(child: Text(e.message.toString()),);

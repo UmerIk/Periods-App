@@ -114,7 +114,7 @@ class HomeScreen extends StatelessWidget {
     var databaseReference = FirebaseDatabase.instance.reference()
         .child("Users").child(FirebaseAuth.instance.currentUser!.uid);
 
-    return StreamBuilder<Event>(
+    return StreamBuilder<DatabaseEvent>(
       stream: databaseReference.onValue,
       builder: (context, snapshot) {
         if (snapshot.hasError) {
@@ -188,7 +188,7 @@ class HomeScreen extends StatelessWidget {
         .child("Period").child(FirebaseAuth.instance.currentUser!.uid);
 
 
-    return StreamBuilder<Event>(
+    return StreamBuilder<DatabaseEvent>(
       stream: databaseReference.onValue,
       builder: (context, snapshot) {
         if(snapshot.hasError){
